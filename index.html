@@ -4,1014 +4,334 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Recycling — 4 подхода · Данилов М.Ф. · 1-МГ-50</title>
-  <meta name="description" content="Портфолио промышленного дизайна. Четыре проекта, четыре подхода к переработке. Данилов М.Ф., 1-МГ-50.">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
-
-  <!-- GSAP + ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" crossorigin="anonymous"></script>
-
-  <style>
-    /* ─── TOKENS ──────────────────────────────────────────────── */
-    :root {
-      --bg:            #1A1A1A;
-      --bg-deep:       #0D0D0D;
-      --bg-footer:     #111111;
-      --surface:       #222222;
-      --surface-2:     #2A2A2A;
-      --line:          rgba(255,255,255,0.08);
-      --line-strong:   rgba(255,255,255,0.16);
-
-      --fg:            #F0F0F0;
-      --fg-2:          #AAAAAA;
-      --fg-3:          #888888;
-      --fg-4:          #555555;
-      --fg-faint:      rgba(255,255,255,0.03);
-
-      --accent-domestic: #E8D5B0;
-      --accent-eco:      #8BFF6E;
-      --accent-repair:   #FF8C42;
-      --accent-art:      #E0DDD6;
-      --accent:          var(--accent-domestic);
-
-      --font-display: "Space Grotesk", system-ui, sans-serif;
-      --font-sans:    "Inter", system-ui, sans-serif;
-      --font-mono:    ui-monospace, "JetBrains Mono", Menlo, monospace;
-
-      --fs-hero:     clamp(80px, 13vw, 220px);
-      --fs-display:  clamp(56px, 7vw, 112px);
-      --fs-h1:       clamp(48px, 5vw, 72px);
-      --fs-h2:       clamp(32px, 3.4vw, 56px);
-      --fs-h3:       28px;
-      --fs-body:     17px;
-      --fs-small:    14px;
-      --fs-eyebrow:  11px;
-      --fs-numeral:  clamp(180px, 22vw, 320px);
-
-      --lh-tight:  0.95;
-      --lh-snug:   1.1;
-      --lh-body:   1.65;
-
-      --ls-tight:   -0.03em;
-      --ls-eyebrow:  0.15em;
-
-      --space-4:  16px;
-      --space-5:  24px;
-      --space-6:  32px;
-      --space-7:  48px;
-      --space-8:  64px;
-      --space-9:  96px;
-      --space-10: 144px;
-
-      --gutter: 96px;
-      --gutter-m: 24px;
-      --container: 1280px;
-
-      --radius-md:  12px;
-      --radius-lg:  20px;
-      --radius-xl:  30px;
-
-      --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-      --dur-fast:  180ms;
-      --dur-base:  320ms;
-    }
-
-    /* ─── RESET ───────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: var(--font-sans);
-      font-size: var(--fs-body);
-      line-height: var(--lh-body);
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
-      overflow-x: hidden;
-    }
-    img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    a { color: var(--fg); text-decoration: none; transition: opacity var(--dur-fast) var(--ease-out); }
-    a:hover { opacity: 0.6; }
-
-    /* ─── NAV ─────────────────────────────────────────────────── */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      transition: background var(--dur-base) var(--ease-out),
-                  backdrop-filter var(--dur-base) var(--ease-out);
-    }
-    .nav.is-scrolled {
-      background: rgba(26,26,26,0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--line);
-    }
-    .nav-inner {
-      max-width: var(--container); margin: 0 auto;
-      padding: 22px var(--gutter);
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .nav-logo {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: 22px; letter-spacing: -0.02em; color: var(--fg);
-    }
-    .nav-links { display: flex; gap: 36px; }
-    .nav-link { font-size: 13px; color: var(--fg-2); font-weight: 500; letter-spacing: 0.01em; }
-    .nav-num {
-      font-family: var(--font-mono); font-size: 11px;
-      color: var(--fg-3); margin-right: 8px;
-    }
-    @media (max-width: 760px) {
-      .nav-inner { padding: 16px var(--gutter-m); }
-      .nav-links { gap: 20px; }
-      .nav-link { font-size: 12px; }
-    }
-
-    /* ─── HERO ────────────────────────────────────────────────── */
-    .hero {
-      position: relative; min-height: 100vh;
-      display: grid; grid-template-rows: 1fr auto;
-      padding: 0 var(--gutter) 64px;
-      max-width: var(--container); margin: 0 auto;
-    }
-    .hero-eyebrow {
-      position: absolute; top: 100px; left: var(--gutter);
-      font-family: var(--font-mono); font-size: 12px;
-      color: var(--fg-3); letter-spacing: 0.12em; text-transform: uppercase;
-    }
-    .hero-title-wrap { align-self: center; padding-top: 140px; }
-    .hero-title {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: var(--fs-hero);
-      line-height: 0.9; letter-spacing: -0.04em;
-      text-transform: uppercase; color: var(--fg);
-      overflow: hidden;
-    }
-    .hero-title .word { display: inline-block; }
-    .hero-title .line { display: block; overflow: hidden; }
-    .hero-meta {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
-      padding-top: 32px; border-top: 1px solid var(--line);
-      font-size: 13px; color: var(--fg-3);
-      letter-spacing: 0.08em; text-transform: uppercase;
-    }
-    .hero-quote {
-      color: var(--fg-2); text-transform: none;
-      letter-spacing: 0; font-style: italic; font-size: 15px;
-      line-height: 1.6; align-self: center;
-    }
-    .hero-scroll-hint {
-      display: inline-block; margin-top: 40px;
-      font-size: 12px; color: var(--fg-3);
-      letter-spacing: 0.12em; text-transform: uppercase;
-    }
-    @media (max-width: 760px) {
-      .hero { padding: 0 var(--gutter-m) 48px; }
-      .hero-eyebrow { left: var(--gutter-m); top: 80px; }
-      .hero-meta { grid-template-columns: 1fr; gap: 16px; }
-    }
-
-    /* ─── SECTIONS ────────────────────────────────────────────── */
-    .section {
-      position: relative;
-      padding: var(--space-10) var(--gutter);
-      overflow: hidden;
-    }
-    .section.is-art { background: var(--bg-deep); }
-    .section-inner { max-width: var(--container); margin: 0 auto; position: relative; }
-
-    /* ghost numeral */
-    .ghost-num {
-      position: absolute; left: -10px; top: -100px;
-      font-family: var(--font-display); font-weight: 800;
-      font-size: var(--fs-numeral);
-      line-height: 0.85; letter-spacing: -0.06em;
-      color: var(--fg-faint);
-      pointer-events: none; user-select: none;
-      will-change: transform;
-    }
-
-    /* section header */
-    .section-header { position: relative; padding-bottom: var(--space-8); }
-    .section-top {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; position: relative;
-    }
-    .section-num {
-      font-family: var(--font-display); font-weight: 700;
-      font-size: 36px; letter-spacing: -0.02em; color: var(--fg);
-    }
-    .eyebrow {
-      font-size: var(--fs-eyebrow); font-weight: 600;
-      letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
-      color: var(--accent);
-    }
-    .section-title {
-      position: relative; margin: 64px 0 0;
-      font-family: var(--font-display); font-weight: 700;
-      font-size: clamp(48px, 6vw, 96px);
-      line-height: 0.95; letter-spacing: -0.03em; color: var(--fg);
-    }
-    .section-lede {
-      position: relative; max-width: 660px; margin: 28px 0 0;
-      font-size: 18px; line-height: 1.65; color: var(--fg-2);
-    }
-
-    /* accent line */
-    .accent-slab { height: 3px; margin-bottom: 24px; border-radius: 2px; }
-
-    /* ─── IMAGE CARDS ─────────────────────────────────────────── */
-    .img-card {
-      position: relative; border-radius: var(--radius-xl);
-      overflow: hidden; background: var(--surface);
-    }
-    .img-card img {
-      transition: transform 0.5s var(--ease-out);
-    }
-    .img-card:hover img { transform: scale(1.025); }
-    .img-placeholder {
-      display: flex; align-items: center; justify-content: center;
-      background: repeating-linear-gradient(45deg, #222 0 12px, #1f1f1f 12px 24px);
-      color: var(--fg-3); font-family: var(--font-mono);
-      font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em;
-      text-align: center; padding: 16px;
-    }
-    .img-cap {
-      position: absolute; left: 20px; bottom: 16px;
-      font-family: var(--font-mono); font-size: 11px;
-      color: rgba(255,255,255,0.8); letter-spacing: 0.06em;
-      text-transform: uppercase; background: rgba(0,0,0,0.3);
-      padding: 4px 10px; border-radius: 4px;
-      backdrop-filter: blur(4px);
-    }
-
-    /* ─── LAYOUT GRIDS ────────────────────────────────────────── */
-    .grid-2col { display: grid; grid-template-columns: 4fr 6fr; gap: 64px; align-items: start; margin-top: var(--space-9); }
-    .grid-2col.even { grid-template-columns: 1fr 1fr; }
-    .grid-3col { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; }
-    .grid-2-1 { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; }
-    .grid-1-2 { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; }
-    .grid-stacked { display: grid; gap: 16px; }
-    @media (max-width: 900px) {
-      .grid-2col, .grid-2col.even, .grid-2-1, .grid-1-2 {
-        grid-template-columns: 1fr; gap: 24px;
-      }
-      .grid-3col { grid-template-columns: 1fr 1fr; }
-    }
-    @media (max-width: 600px) {
-      .grid-3col { grid-template-columns: 1fr; }
-    }
-
-    /* ─── SPEC TABLE ──────────────────────────────────────────── */
-    .spec-table { font-family: var(--font-sans); }
-    .spec-title {
-      font-family: var(--font-display); font-size: 22px;
-      font-weight: 600; letter-spacing: -0.01em; color: var(--fg); margin-bottom: 20px;
-    }
-    .spec-grid {
-      display: grid; grid-template-columns: 160px 1fr;
-      row-gap: 16px; column-gap: 16px;
-      padding-top: 18px; border-top: 1px solid var(--line);
-      font-size: 14px;
-    }
-    .spec-grid dt { color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; font-size: 11px; padding-top: 2px; }
-    .spec-grid dd { color: var(--fg); }
-
-    /* ─── TECH DRAWING BLOCK ──────────────────────────────────── */
-    .tech-wrap {
-      background: var(--surface); border-radius: var(--radius-lg);
-      padding: 40px; margin-top: 96px;
-    }
-    .tech-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-top: 24px; }
-    .tech-cell { background: #1a1a1a; border-radius: var(--radius-md); padding: 28px; }
-    .tech-art { position: relative; }
-    .tech-art svg { width: 100%; height: 220px; }
-    .tech-tick { height: 2px; width: 48px; margin-top: 16px; border-radius: 1px; }
-    .tech-cap {
-      font-family: var(--font-mono); font-size: 11px; color: var(--fg-3);
-      margin-top: 12px; text-transform: uppercase; letter-spacing: 0.1em;
-    }
-    @media (max-width: 760px) { .tech-grid { grid-template-columns: 1fr; } }
-
-    /* ─── ANALOG ROWS ─────────────────────────────────────────── */
-    .analog { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; margin-top: 64px; }
-    .analog.flip { direction: rtl; }
-    .analog.flip > * { direction: ltr; }
-    .analog-source {
-      font-family: var(--font-mono); font-size: 11px; color: var(--accent);
-      letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 12px;
-    }
-    .analog-title {
-      font-family: var(--font-display); font-size: 24px; font-weight: 600;
-      color: var(--fg); margin-bottom: 14px; letter-spacing: -0.01em;
-    }
-    .analog-body { font-size: 16px; line-height: 1.65; color: var(--fg-2); }
-    @media (max-width: 760px) { .analog, .analog.flip { grid-template-columns: 1fr; direction: ltr; } }
-
-    /* ─── PERSONA CARD ────────────────────────────────────────── */
-    .persona {
-      border: 1px solid var(--line); border-radius: var(--radius-lg);
-      padding: 40px; position: relative; overflow: hidden;
-    }
-    .persona-mark {
-      font-family: var(--font-display); font-size: 120px; font-weight: 800;
-      line-height: 0.8; color: var(--accent); opacity: 0.15;
-      position: absolute; top: 0; left: 24px; pointer-events: none;
-    }
-    .persona-name {
-      font-family: var(--font-display); font-size: 28px; font-weight: 700;
-      color: var(--fg); margin-bottom: 16px; position: relative;
-    }
-    .persona-name span { color: var(--fg-3); font-weight: 400; font-size: 18px; }
-    .persona-body { font-size: 17px; line-height: 1.7; color: var(--fg-2); position: relative; }
-
-    /* ─── PRINCIPLE LIST ──────────────────────────────────────── */
-    .principles { list-style: none; display: grid; gap: 2px; }
-    .principles li {
-      display: grid; grid-template-columns: 48px 1fr;
-      gap: 20px; padding: 20px 0;
-      border-bottom: 1px solid var(--line); align-items: baseline;
-    }
-    .principle-num {
-      font-family: var(--font-mono); font-size: 11px;
-      color: var(--accent); letter-spacing: 0.1em;
-    }
-    .principle-text { font-size: 16px; line-height: 1.65; color: var(--fg-2); }
-
-    /* ─── MATERIAL BOARD ──────────────────────────────────────── */
-    .material-board { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 64px; }
-    .material-cell {
-      aspect-ratio: 4/3; border-radius: var(--radius-xl);
-      overflow: hidden; position: relative;
-    }
-    .material-label {
-      position: absolute; bottom: 20px; left: 20px;
-      font-family: var(--font-display); font-size: 18px;
-      font-weight: 600; color: var(--fg);
-      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
-    }
-    @media (max-width: 600px) { .material-board { grid-template-columns: 1fr; } }
-
-    /* ─── SECTION DIVIDER ─────────────────────────────────────── */
-    .section-divider {
-      height: 1px; background: var(--line);
-      max-width: var(--container); margin: 0 auto;
-    }
-
-    /* ─── FOOTER ──────────────────────────────────────────────── */
-    .footer {
-      background: var(--bg-footer);
-      padding: 96px var(--gutter) 40px;
-      border-top: 1px solid var(--line);
-      margin-top: 0;
-    }
-    .footer-row {
-      max-width: var(--container); margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 32px; padding-bottom: 80px;
-      font-family: var(--font-display); font-size: 18px; color: var(--fg);
-    }
-    .footer-row > div:nth-child(2) { text-align: center; color: var(--fg-3); }
-    .footer-row > div:nth-child(3) { text-align: right; color: var(--fg-3); }
-    .footer-wordmark {
-      font-family: var(--font-display); font-weight: 800;
-      font-size: clamp(120px, 18vw, 280px);
-      line-height: 0.85; letter-spacing: -0.04em;
-      color: #1e1e1e; text-align: center;
-      max-width: var(--container); margin: 0 auto;
-      user-select: none;
-    }
-    .footer-bottom {
-      max-width: var(--container); margin: 40px auto 0;
-      display: flex; justify-content: space-between;
-      font-size: 11px; color: var(--fg-4);
-      letter-spacing: 0.1em; text-transform: uppercase;
-    }
-    .footer-bottom-links { display: flex; gap: 24px; }
-    @media (max-width: 760px) {
-      .footer { padding: 64px var(--gutter-m) 32px; }
-      .footer-row { grid-template-columns: 1fr; text-align: left; gap: 8px; }
-      .footer-row > div:nth-child(2), .footer-row > div:nth-child(3) { text-align: left; }
-      .footer-bottom { flex-direction: column; gap: 16px; }
-    }
-
-    /* ─── UTILITY ─────────────────────────────────────────────── */
-    .mt-4  { margin-top: 16px; }
-    .mt-5  { margin-top: 24px; }
-    .mt-6  { margin-top: 32px; }
-    .mt-7  { margin-top: 48px; }
-    .mt-8  { margin-top: 64px; }
-    .mt-9  { margin-top: 96px; }
-    .mt-10 { margin-top: 144px; }
-
-    /* ─── SCROLL FADE (no-JS fallback will show elements) ───── */
-    .reveal { opacity: 0; transform: translateY(32px); }
-
-    @media (max-width: 760px) {
-      .section { padding: 80px var(--gutter-m); }
-      .ghost-num { font-size: clamp(120px, 30vw, 200px); top: -60px; left: -8px; }
-    }
-  </style>
+  <link rel="stylesheet" href="ui_kits/portfolio/styles.css">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaaqe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body>
+  <div id="root"></div>
+  <script type="text/babel" src="ui_kits/portfolio/Nav.jsx"></script>
+  <script type="text/babel" src="ui_kits/portfolio/Hero.jsx"></script>
+  <script type="text/babel" src="ui_kits/portfolio/Components.jsx"></script>
+  <script type="text/babel">
+    const ACCENT = {
+      domestic: "#E8D5B0",
+      farm:     "#8BFF6E",
+      repair:   "#FF8C42",
+      art:      "#E0DDD6",
+    };
 
-<!-- ═══════════════════════════════════════════════════════ NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-inner">
-    <a href="#top" class="nav-logo">ДМФ</a>
-    <div class="nav-links">
-      <a href="#domestic" class="nav-link"><span class="nav-num">01</span>Domestic</a>
-      <a href="#farm"     class="nav-link"><span class="nav-num">02</span>Eco Farm</a>
-      <a href="#repair"   class="nav-link"><span class="nav-num">03</span>Repair</a>
-      <a href="#art"      class="nav-link"><span class="nav-num">04</span>Art</a>
-    </div>
-  </div>
-</nav>
+    const FadeIn = ({ children, delay = 0 }) => {
+      const ref = React.useRef(null);
+      React.useEffect(() => {
+        const el = ref.current;
+        const io = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) { el.classList.add("is-in"); io.disconnect(); }
+        }, { threshold: 0.08 });
+        io.observe(el);
+        return () => io.disconnect();
+      }, []);
+      return <div ref={ref} className="pf-fade" style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
+    };
 
-<!-- ════════════════════════════════════════════════════════ HERO -->
-<header id="top">
-  <div class="hero">
-    <div class="hero-eyebrow">[ Recycling — 4 подхода ]</div>
-    <div class="hero-title-wrap">
-      <h1 class="hero-title" aria-label="Переработка. Дизайн.">
-        <span class="line"><span class="word" data-hero-word>Переработка.</span></span>
-        <span class="line"><span class="word" data-hero-word>Дизайн.</span></span>
-      </h1>
-    </div>
-    <div>
-      <div class="hero-meta">
-        <div>Данилов М.Ф. — 1-МГ-50</div>
-        <div class="hero-quote">«Четыре проекта, четыре подхода к переосмыслению материала: domestic, eco, repair, art.»</div>
-      </div>
-      <a href="#domestic" class="hero-scroll-hint">Смотреть проекты ↓</a>
-    </div>
-  </div>
-</header>
+    /* ─── Section 01 — Подход (Domestic recycling concept) ─── */
+    const Section01 = () => (
+      <section id="approach" className="pf-section" data-screen-label="01 Подход" style={{ "--accent": ACCENT.domestic }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="01"
+              eyebrow="Domestic Recycling"
+              title="Подход —<br/>бытовая переработка"
+              accent={ACCENT.domestic}
+              lede="Подход в промышленном дизайне, при котором повседневные объекты не утилизируются, а повторно используются с изменением формы и функции. В отличие от классической переработки, материал не проходит цикл разрушения — он сохраняется как физическая структура. Идея — переосмысление существующего объекта и создание на его основе нового функционального решения."
+            />
+          </FadeIn>
 
-<div class="section-divider"></div>
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.domestic, marginBottom: 24 }}>Ключевые принципы</div>
+              <PrincipleList accent={ACCENT.domestic} items={[
+                "Сохранение формы — частичное или полное сохранение исходной геометрии. Базовая конструкция не меняется радикально, а используется как основа.",
+                "Изменение функции — предмет, изначально предназначенный для одной задачи, начинает выполнять другую. Упаковка → хранение, рабочая поверхность, инструментальный модуль.",
+                "Минимальное вмешательство — никаких клеев и дополнительных материалов. Только пазы, сгибы и существующие соединения исходного объекта.",
+                "Доступная реализация — снижает затраты, упрощает производство, открывает процесс для самостоятельной сборки в бытовых условиях.",
+              ]} />
+            </div>
+          </FadeIn>
 
-<!-- ═══════════════════════════════════════════════════ SECTION 01 -->
-<section class="section" id="domestic" style="--accent: var(--accent-domestic)">
-  <div class="section-inner">
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.domestic, marginBottom: 24 }}>Аналоги — как работают другие</div>
+            </div>
+          </FadeIn>
 
-    <!-- ghost numeral -->
-    <div class="ghost-num" data-parallax>01</div>
+          <FadeIn delay={80}>
+            <AnalogRow
+              accent={ACCENT.domestic}
+              source="NIKELAB"
+              title="Air Max — упаковка как рюкзак"
+              body="Упаковка обуви разработана так, что после извлечения продукта может использоваться как рюкзак. Конструкция из жёсткого переработанного пластика с отверстиями для крепления ремней. Упаковка изначально проектируется как функциональный объект, а не одноразовый элемент."
+              src="assets/projects/_approach/example_nike.png"
+              alt="Nike Air Max — упаковка-рюкзак"
+            />
+          </FadeIn>
 
-    <!-- header -->
-    <div class="section-header reveal">
-      <div class="section-top">
-        <div class="section-num">01</div>
-        <div class="eyebrow">Domestic Recycling</div>
-      </div>
-      <h2 class="section-title">Стойка для&nbsp;растений</h2>
-      <p class="section-lede">Подход в промышленном дизайне, при котором повседневные объекты не утилизируются, а повторно используются с изменением формы и функции. В отличие от классической переработки, материал сохраняется как физическая структура — переосмысливается и становится новым функциональным решением.</p>
-    </div>
+          <FadeIn delay={80}>
+            <AnalogRow
+              accent={ACCENT.domestic}
+              source="PUMA"
+              title="Clever Little Bag"
+              body="Гибридная система: картонная основа + многоразовая сумка. Упаковка выполняет несколько функций — хранение, транспортировка, дальнейшее использование. Сокращает отходы и повышает функциональность."
+              src="assets/projects/_approach/example_puma.png"
+              alt="PUMA Clever Little Bag"
+              flip
+            />
+          </FadeIn>
 
-    <!-- accent slab + hero image -->
-    <div class="reveal mt-8">
-      <div class="accent-slab" style="background: var(--accent-domestic); width: 240px;"></div>
-      <div class="img-card" style="height: 520px;">
-        <img src="assets/projects/_approach/closing.jpg" alt="Domestic Recycling — финальный слайд проекта" loading="lazy">
-        <span class="img-cap">Domestic Recycling · подход</span>
-      </div>
-    </div>
-
-    <!-- principles -->
-    <div class="reveal mt-9">
-      <div class="eyebrow" style="margin-bottom: 24px;">Ключевые принципы</div>
-      <ol class="principles">
-        <li>
-          <span class="principle-num">01</span>
-          <span class="principle-text"><strong style="color:var(--fg)">Сохранение формы</strong> — частичное или полное сохранение исходной геометрии. Базовая конструкция используется как основа без радикальных изменений.</span>
-        </li>
-        <li>
-          <span class="principle-num">02</span>
-          <span class="principle-text"><strong style="color:var(--fg)">Изменение функции</strong> — предмет, предназначенный для одной задачи, начинает выполнять другую. Упаковка → хранение, рабочая поверхность, инструментальный модуль.</span>
-        </li>
-        <li>
-          <span class="principle-num">03</span>
-          <span class="principle-text"><strong style="color:var(--fg)">Минимальное вмешательство</strong> — никаких клеев и дополнительных материалов. Только пазы, сгибы и существующие соединения исходного объекта.</span>
-        </li>
-        <li>
-          <span class="principle-num">04</span>
-          <span class="principle-text"><strong style="color:var(--fg)">Доступная реализация</strong> — снижает затраты, упрощает производство, открывает процесс для самостоятельной сборки в бытовых условиях.</span>
-        </li>
-      </ol>
-    </div>
-
-    <!-- analog rows -->
-    <div class="reveal mt-9">
-      <div class="eyebrow" style="margin-bottom: 8px;">Аналоги — как работают другие</div>
-    </div>
-
-    <div class="analog reveal">
-      <div>
-        <div class="analog-source">NikeLab</div>
-        <h3 class="analog-title">Air Max — упаковка как рюкзак</h3>
-        <p class="analog-body">Упаковка обуви разработана так, что после извлечения продукта может использоваться как рюкзак. Конструкция из жёсткого переработанного пластика с отверстиями для крепления ремней. Упаковка изначально проектируется как функциональный объект, а не одноразовый элемент.</p>
-      </div>
-      <div class="img-card" style="height: 400px;">
-        <img src="assets/projects/_approach/example_nike.png" alt="Nike Air Max — упаковка-рюкзак" loading="lazy">
-      </div>
-    </div>
-
-    <div class="analog flip reveal">
-      <div>
-        <div class="analog-source">Puma</div>
-        <h3 class="analog-title">Clever Little Bag</h3>
-        <p class="analog-body">Гибридная система: картонная основа + многоразовая сумка. Упаковка выполняет несколько функций — хранение, транспортировка, дальнейшее использование. Сокращает отходы и повышает функциональность.</p>
-      </div>
-      <div class="img-card" style="height: 400px;">
-        <img src="assets/projects/_approach/example_puma.png" alt="PUMA Clever Little Bag" loading="lazy">
-      </div>
-    </div>
-
-    <div class="analog reveal">
-      <div>
-        <div class="analog-source">Yuto Design</div>
-        <h3 class="analog-title">Упаковка → полка</h3>
-        <p class="analog-body">Упаковка после раскрытия превращается в компактную полку для хранения документов. Особенность: трансформация без дополнительных элементов, за счёт заранее предусмотренной геометрии и механики складывания.</p>
-      </div>
-      <div class="img-card" style="height: 400px;">
-        <img src="assets/projects/_approach/example_yuto.png" alt="YUTO Design — упаковка-полка" loading="lazy">
-      </div>
-    </div>
-
-    <!-- conclusion -->
-    <div class="reveal mt-9" style="max-width: 640px; border-left: 3px solid var(--accent-domestic); padding-left: 28px;">
-      <p style="font-size: 18px; line-height: 1.7; color: var(--fg-2);">
-        Domestic recycling позволяет создавать новые функциональные объекты без дополнительных ресурсов, используя уже существующие конструкции. Подход сочетает простоту реализации, практическую ценность и экологическую составляющую.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ═══════════════════════════════════════════════════ SECTION 02 -->
-<section class="section" id="farm" style="--accent: var(--accent-eco)">
-  <div class="section-inner">
-
-    <div class="ghost-num" data-parallax>02</div>
-
-    <div class="section-header reveal">
-      <div class="section-top">
-        <div class="section-num">02</div>
-        <div class="eyebrow">Eco Approach</div>
-      </div>
-      <h2 class="section-title">Модульная вертикальная&nbsp;фитоферма</h2>
-      <p class="section-lede">Мобильная напольная фитоферма для пользователей 65–80 лет. Горшки крепятся в индивидуальные чехлы на горизонтальных пазах панели без инструментов. Перемещение без подъёма, уход без наклонов.</p>
-    </div>
-
-    <!-- accent + hero image -->
-    <div class="reveal mt-8">
-      <div class="accent-slab" style="background: var(--accent-eco); width: 240px;"></div>
-      <div class="img-card" style="height: 600px;">
-        <img src="assets/projects/02_farm/prototype_side.png" alt="Прототип фитофермы · вид сбоку" loading="lazy">
-        <span class="img-cap">Прототип · вид сбоку</span>
-      </div>
-    </div>
-
-    <!-- specs + scenario -->
-    <div class="grid-2col reveal">
-      <div class="spec-table">
-        <div class="spec-title">Характеристики</div>
-        <dl class="spec-grid">
-          <dt>Пользователь</dt><dd>65–80 лет</dd>
-          <dt>Материал</dt><dd>Переработанный rPP / rPET</dd>
-          <dt>База</dt><dd>100 × 40 см, 4 поворотных колеса</dd>
-          <dt>Нагрузка</dt><dd>Кашпо 2–4 кг · рама до 40 кг</dd>
-          <dt>Сборка</dt><dd>Разборная без клея</dd>
-          <dt>Центр тяжести</dt><dd>Низкий, равномерное распределение</dd>
-          <dt>Эко-подход</dt><dd>rPP/rPET, разборка по мономатериалам</dd>
-        </dl>
-      </div>
-      <div class="img-card" style="height: 460px;">
-        <img src="assets/projects/02_farm/scenario.png" alt="Сценарий использования" loading="lazy">
-        <span class="img-cap">Сценарий · раскадровка</span>
-      </div>
-    </div>
-
-    <!-- persona -->
-    <div class="reveal mt-9">
-      <div class="eyebrow" style="margin-bottom: 24px;">Образ пользователя</div>
-      <div class="persona" style="--accent: var(--accent-eco)">
-        <div class="persona-mark">"</div>
-        <div class="persona-name">Людмила <span>· 68 лет</span></div>
-        <p class="persona-body">Живёт одна, ухаживает за растениями. Тяжело поднимать горшки, неудобно наклоняться. Потребности: перемещать без подъёма, меньше наклоняться, безопасность и самостоятельность.</p>
-      </div>
-    </div>
-
-    <!-- analogues gallery -->
-    <div class="reveal mt-9">
-      <div class="eyebrow" style="margin-bottom: 24px;">Аналоги</div>
-      <div class="grid-3col">
-        <div class="img-card" style="height: 280px;">
-          <img src="assets/projects/02_farm/example_ikea.png" alt="IKEA KRYDDA / VÄXER" loading="lazy">
-          <span class="img-cap">IKEA KRYDDA / VÄXER</span>
+          <FadeIn delay={80}>
+            <AnalogRow
+              accent={ACCENT.domestic}
+              source="YUTO DESIGN"
+              title="Упаковка → полка"
+              body="Упаковка после раскрытия и изменения конфигурации превращается в компактную полку для хранения документов. Особенность: трансформация без дополнительных элементов, за счёт заранее предусмотренной геометрии и механики складывания."
+              src="assets/projects/_approach/example_yuto.png"
+              alt="YUTO Design — упаковка-полка"
+            />
+          </FadeIn>
         </div>
-        <div class="img-card" style="height: 280px;">
-          <img src="assets/projects/02_farm/example_greenstalk.png" alt="GreenStalk" loading="lazy">
-          <span class="img-cap">GreenStalk · ярусная башня</span>
-        </div>
-        <div class="img-card" style="height: 280px;">
-          <img src="assets/projects/02_farm/example_aerogarden.png" alt="AeroGarden" loading="lazy">
-          <span class="img-cap">AeroGarden · гидропоника</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- technical drawing -->
-    <div class="tech-wrap reveal">
-      <div class="eyebrow" style="margin-bottom: 16px;">Технический чертёж</div>
-      <div class="img-card" style="height: 580px;">
-        <img src="assets/projects/02_farm/chertezh.png" alt="Технический чертёж фитофермы" loading="lazy">
-        <span class="img-cap">Чертёж · рама, узлы, колёсная база</span>
-      </div>
-    </div>
-
-    <!-- persona image -->
-    <div class="reveal mt-8">
-      <div class="eyebrow" style="margin-bottom: 16px;">Персона</div>
-      <div class="img-card" style="height: 420px;">
-        <img src="assets/projects/02_farm/persona.png" alt="Образ пользователя — Людмила" loading="lazy">
-        <span class="img-cap">Образ пользователя</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ═══════════════════════════════════════════════════ SECTION 03 -->
-<section class="section" id="repair" style="--accent: var(--accent-repair)">
-  <div class="section-inner">
-
-    <div class="ghost-num" data-parallax>03</div>
-
-    <div class="section-header reveal">
-      <div class="section-top">
-        <div class="section-num">03</div>
-        <div class="eyebrow">Domestic Repair</div>
-      </div>
-      <h2 class="section-title">Ремонтная станция</h2>
-      <p class="section-lede">Жёсткая упаковочная коробка трансформируется в компактную ремонтную станцию для мелкой электроники без использования дополнительных материалов. Основание — рабочая поверхность. Крышка — вертикальная задняя панель. Боковые клапаны — ограничители и секции.</p>
-    </div>
-
-    <!-- accent + env images -->
-    <div class="reveal mt-8">
-      <div class="accent-slab" style="background: var(--accent-repair); width: 240px;"></div>
-      <div class="img-card" style="height: 560px;">
-        <img src="assets/projects/03_repair/env1.png" alt="Ремонтная станция в среде" loading="lazy">
-        <span class="img-cap">Открыто · рабочая станция</span>
-      </div>
-    </div>
-
-    <!-- assembly grid -->
-    <div class="grid-2col even reveal">
-      <div class="img-card" style="height: 440px;">
-        <img src="assets/projects/03_repair/assembly1.png" alt="Сборка ремонтной станции — шаг 1" loading="lazy">
-        <span class="img-cap">Сборка — этап 1</span>
-      </div>
-      <div class="img-card" style="height: 440px;">
-        <img src="assets/projects/03_repair/assembly2.png" alt="Сборка ремонтной станции — шаг 2" loading="lazy">
-        <span class="img-cap">Сборка — этап 2</span>
-      </div>
-    </div>
-
-    <!-- sketch -->
-    <div class="reveal mt-8">
-      <div class="eyebrow" style="margin-bottom: 16px;">Эскиз</div>
-      <div class="img-card" style="height: 480px;">
-        <img src="assets/projects/03_repair/sketch.png" alt="Эскиз ремонтной станции" loading="lazy">
-        <span class="img-cap">Эскиз · развёртка и трансформация</span>
-      </div>
-    </div>
-
-    <!-- env2 + specs -->
-    <div class="grid-2col reveal">
-      <div class="spec-table">
-        <div class="spec-title">Характеристики</div>
-        <dl class="spec-grid">
-          <dt>Пользователь</dt><dd>18–24 лет, DIY-культура</dd>
-          <dt>Материал</dt><dd>Жёсткий картон (исходная коробка)</dd>
-          <dt>Рабочая зона</dt><dd>Основание коробки</dd>
-          <dt>Задняя панель</dt><dd>Крышка коробки (вертикально)</dd>
-          <dt>Перегородки</dt><dd>Полосы из той же коробки</dd>
-          <dt>Фиксация</dt><dd>Пазы, загибы, вставки</dd>
-          <dt>Портативность</dt><dd>Складывается обратно в коробку</dd>
-        </dl>
-      </div>
-      <div class="img-card" style="height: 460px;">
-        <img src="assets/projects/03_repair/env2.png" alt="Ремонтная станция — вид сверху" loading="lazy">
-        <span class="img-cap">В работе · вид сверху</span>
-      </div>
-    </div>
-
-    <!-- tech drawings (SVG schematics) -->
-    <div class="tech-wrap reveal">
-      <div class="eyebrow" style="margin-bottom: 16px;">Технические развёртки</div>
-      <div class="tech-grid">
-        <div class="tech-cell">
-          <div class="tech-art">
-            <svg viewBox="0 0 200 220" fill="none" stroke="#F0F0F0" stroke-width="1.4">
-              <rect x="20" y="50" width="160" height="120"/>
-              <line x1="20" y1="110" x2="180" y2="110"/>
-              <line x1="100" y1="50" x2="100" y2="170"/>
-              <rect x="30" y="60" width="60" height="40" stroke-dasharray="4 3"/>
-              <rect x="110" y="60" width="60" height="40" stroke-dasharray="4 3"/>
-            </svg>
-          </div>
-          <div class="tech-tick" style="background: var(--accent-repair)"></div>
-          <div class="tech-cap">Развёртка · flat layout</div>
-        </div>
-        <div class="tech-cell">
-          <div class="tech-art">
-            <svg viewBox="0 0 200 220" fill="none" stroke="#F0F0F0" stroke-width="1.4">
-              <rect x="40" y="20" width="120" height="180"/>
-              <line x1="40" y1="70" x2="160" y2="70"/>
-              <line x1="40" y1="120" x2="160" y2="120"/>
-              <line x1="40" y1="160" x2="160" y2="160"/>
-              <rect x="50" y="30" width="24" height="24" rx="2"/>
-              <rect x="84" y="30" width="24" height="24" rx="2"/>
-              <rect x="118" y="30" width="24" height="24" rx="2"/>
-            </svg>
-          </div>
-          <div class="tech-tick" style="background: var(--accent-repair)"></div>
-          <div class="tech-cap">Держатели инструментов</div>
-        </div>
-        <div class="tech-cell">
-          <div class="tech-art">
-            <svg viewBox="0 0 200 220" fill="none" stroke="#F0F0F0" stroke-width="1.4">
-              <rect x="60" y="20" width="80" height="180"/>
-              <line x1="60" y1="60" x2="140" y2="60"/>
-              <line x1="60" y1="100" x2="140" y2="100"/>
-              <line x1="60" y1="150" x2="140" y2="150"/>
-              <path d="M130 20 L140 30 L140 20 Z" fill="#F0F0F0"/>
-            </svg>
-          </div>
-          <div class="tech-tick" style="background: var(--accent-repair)"></div>
-          <div class="tech-cap">Отсеки деталей · ручка</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- analogues -->
-    <div class="reveal mt-9">
-      <div class="eyebrow" style="margin-bottom: 24px;">Аналоги</div>
-      <div class="grid-3col">
-        <div class="img-card" style="height: 260px;">
-          <img src="assets/projects/03_repair/analog_ifixit.png" alt="iFixit Pro Tech Toolkit" loading="lazy">
-          <span class="img-cap">iFixit Pro Tech Toolkit</span>
-        </div>
-        <div class="img-card" style="height: 260px;">
-          <img src="assets/projects/03_repair/analog_solderbot.png" alt="Solderbot Portable Station" loading="lazy">
-          <span class="img-cap">Solderbot · паяльная станция</span>
-        </div>
-        <div class="img-card" style="height: 260px;">
-          <img src="assets/projects/03_repair/analog_tactix.png" alt="Tactix Portable Case" loading="lazy">
-          <span class="img-cap">Tactix · модульный кейс</span>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="section-divider"></div>
-
-<!-- ═══════════════════════════════════════════════════ SECTION 04 -->
-<section class="section is-art" id="art" style="--accent: var(--accent-art)">
-  <div class="section-inner">
-
-    <div class="ghost-num" data-parallax>04</div>
-
-    <div class="section-header reveal">
-      <div class="section-top">
-        <div class="section-num">04</div>
-        <div class="eyebrow">Art Recycling</div>
-      </div>
-      <h2 class="section-title">Машинка‑батарейка</h2>
-      <p class="section-lede">Машинка для скрутки сигарет переосмыслена как батарейка — метафора цифрового скроллинга. Два ролика — два полюса. Журнальная лента — бесконечный поток контента. Крутят рукоятку: из одного ролика в другой перематывается лента — энергия внимания, которую вы отдаёте экрану.</p>
-    </div>
-
-    <!-- concept hero -->
-    <div class="reveal mt-8">
-      <div class="accent-slab" style="background: var(--accent-art); width: 240px;"></div>
-      <div class="img-card" style="height: 600px;">
-        <img src="assets/projects/04_art/concept_battery.png" alt="Концепт · машинка-батарейка" loading="lazy">
-        <span class="img-cap">Концепт · два ролика = два полюса</span>
-      </div>
-    </div>
-
-    <!-- sketch + moodboard -->
-    <div class="grid-2col even reveal">
-      <div class="img-card" style="height: 520px;">
-        <img src="assets/projects/04_art/sketch.png" alt="Эскиз машинки-батарейки" loading="lazy">
-        <span class="img-cap">Эскиз · проработка идеи</span>
-      </div>
-      <div class="img-card" style="height: 520px;">
-        <img src="assets/projects/04_art/moodboard.jpg" alt="Мудборд — визуальный язык" loading="lazy">
-        <span class="img-cap">Мудборд · визуальный язык</span>
-      </div>
-    </div>
-
-    <!-- drawings -->
-    <div class="reveal mt-8">
-      <div class="eyebrow" style="margin-bottom: 16px;">Чертежи</div>
-      <div class="grid-2col even">
-        <div class="img-card" style="height: 480px;">
-          <img src="assets/projects/04_art/chertezh_1.png" alt="Чертёж · вид спереди" loading="lazy">
-          <span class="img-cap">Чертёж · вид спереди</span>
-        </div>
-        <div class="img-card" style="height: 480px;">
-          <img src="assets/projects/04_art/chertezh_2.png" alt="Чертёж · сечение и ролики" loading="lazy">
-          <span class="img-cap">Чертёж · сечение и ролики</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- materials + closing -->
-    <div class="reveal mt-9">
-      <div class="eyebrow" style="margin-bottom: 16px;">Материалы</div>
-      <div class="img-card" style="height: 480px;">
-        <img src="assets/projects/04_art/materials.png" alt="Материальная палитра проекта" loading="lazy">
-        <span class="img-cap">Материальная палитра</span>
-      </div>
-    </div>
-
-    <!-- 2×2 material board using bg_paper + closing -->
-    <div class="material-board reveal">
-      <div class="material-cell">
-        <img src="assets/projects/04_art/bg_paper.jpg" alt="Фактура бумаги — материал" loading="lazy" style="border-radius: var(--radius-xl);">
-        <div class="material-label">Бумага</div>
-      </div>
-      <div class="material-cell">
-        <img src="assets/projects/04_art/closing.jpg" alt="Завершающий образ проекта" loading="lazy" style="border-radius: var(--radius-xl);">
-        <div class="material-label">Закрытие</div>
-      </div>
-      <div class="material-cell" style="background: #2a2a2a; border-radius: var(--radius-xl); display:flex; align-items:center; justify-content:center;">
-        <div style="text-align:center; padding: 32px;">
-          <div style="font-family: var(--font-display); font-size: 48px; font-weight: 800; color: var(--accent-art); letter-spacing: -0.04em; line-height:1;">AA</div>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 12px; letter-spacing: 0.12em; text-transform: uppercase;">Алюминий</div>
-        </div>
-      </div>
-      <div class="material-cell" style="background: #1a1a1a; border-radius: var(--radius-xl); display:flex; align-items:center; justify-content:center; border: 1px solid var(--line);">
-        <div style="text-align:center; padding: 32px;">
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="32" cy="32" r="28" stroke="#E0DDD6" stroke-width="1.5"/>
-            <line x1="32" y1="8" x2="32" y2="56" stroke="#E0DDD6" stroke-width="1.5"/>
-            <line x1="8" y1="32" x2="56" y2="32" stroke="#E0DDD6" stroke-width="1.5"/>
-          </svg>
-          <div style="font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 12px; letter-spacing: 0.12em; text-transform: uppercase;">Пластик</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- specs -->
-    <div class="reveal mt-9" style="max-width: 560px;">
-      <div class="spec-table">
-        <div class="spec-title">Характеристики</div>
-        <dl class="spec-grid">
-          <dt>Концепция</dt><dd>Арт-переработка · метафорический объект</dd>
-          <dt>Основа</dt><dd>Машинка для скрутки сигарет</dd>
-          <dt>Метафора</dt><dd>Батарейка / цифровой скроллинг</dd>
-          <dt>Механика</dt><dd>Два ролика, журнальная лента</dd>
-          <dt>Материал</dt><dd>Алюминий, переработанный пластик, бумага</dd>
-          <dt>Подход</dt><dd>Art Recycling · переосмысление без разрушения</dd>
-        </dl>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════ FOOTER -->
-<footer class="footer">
-  <div class="footer-row">
-    <div>Данилов М.Ф.</div>
-    <div>Recycling — 4 подхода</div>
-    <div>1-МГ-50 — 2025–2026</div>
-  </div>
-  <div class="footer-wordmark" aria-hidden="true">ДМФ</div>
-  <div class="footer-bottom">
-    <div class="footer-bottom-links">
-      <span>СПбГУПТД</span>
-      <span>Промышленный дизайн</span>
-    </div>
-    <div class="footer-bottom-links">
-      <span>Behance</span>
-      <span>Instagram</span>
-      <span>Email</span>
-    </div>
-  </div>
-</footer>
-
-<!-- ═══════════════════════════════════════════════════════ SCRIPTS -->
-<script>
-  gsap.registerPlugin(ScrollTrigger);
-
-  /* ── Nav scroll class ── */
-  const nav = document.getElementById("nav");
-  ScrollTrigger.create({
-    start: "80px top",
-    onEnter:  () => nav.classList.add("is-scrolled"),
-    onLeaveBack: () => nav.classList.remove("is-scrolled"),
-  });
-
-  /* ── Hero words stagger ── */
-  const heroWords = document.querySelectorAll("[data-hero-word]");
-  gsap.fromTo(heroWords,
-    { yPercent: 110, opacity: 0 },
-    {
-      yPercent: 0, opacity: 1,
-      duration: 1.1, ease: "power4.out",
-      stagger: 0.12, delay: 0.2
-    }
-  );
-
-  /* ── Hero eyebrow fade ── */
-  gsap.fromTo(".hero-eyebrow",
-    { opacity: 0, y: 10 },
-    { opacity: 1, y: 0, duration: 1, ease: "power3.out", delay: 0.8 }
-  );
-
-  /* ── Hero meta fade ── */
-  gsap.fromTo(".hero-meta, .hero-scroll-hint",
-    { opacity: 0, y: 20 },
-    { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", delay: 1.1, stagger: 0.1 }
-  );
-
-  /* ── Reveal on scroll ── */
-  document.querySelectorAll(".reveal").forEach(el => {
-    gsap.fromTo(el,
-      { opacity: 0, y: 36 },
-      {
-        opacity: 1, y: 0,
-        duration: 0.85, ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 88%",
-          once: true,
-        }
-      }
+      </section>
     );
-  });
 
-  /* ── Ghost numeral parallax ── */
-  document.querySelectorAll("[data-parallax]").forEach(el => {
-    gsap.to(el, {
-      yPercent: -30,
-      ease: "none",
-      scrollTrigger: {
-        trigger: el.closest(".section"),
-        start: "top bottom",
-        end: "bottom top",
-        scrub: 1.5,
-      }
-    });
-  });
+    /* ─── Section 02 — Eco / Модульная вертикальная фитоферма ─── */
+    const Section02 = () => (
+      <section id="farm" className="pf-section" data-screen-label="02 Eco Farm" style={{ "--accent": ACCENT.farm }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="02"
+              eyebrow="Eco Approach"
+              title="Модульная<br/>вертикальная фитоферма"
+              accent={ACCENT.farm}
+              lede="Мобильная напольная фитоферма для пользователей 65–80 лет. Горшки крепятся в индивидуальные чехлы на горизонтальных пазах панели без инструментов. Перемещение без подъёма, уход без наклонов."
+            />
+          </FadeIn>
 
-  /* ── Section headers animate in ── */
-  document.querySelectorAll(".section-header").forEach(el => {
-    const title  = el.querySelector(".section-title");
-    const lede   = el.querySelector(".section-lede");
-    const top    = el.querySelector(".section-top");
-    if (title) gsap.fromTo(title,
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out",
-        scrollTrigger: { trigger: title, start: "top 85%", once: true } });
-    if (lede) gsap.fromTo(lede,
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.9, ease: "power3.out", delay: 0.15,
-        scrollTrigger: { trigger: lede, start: "top 85%", once: true } });
-    if (top) gsap.fromTo(top,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.7, ease: "power3.out",
-        scrollTrigger: { trigger: top, start: "top 88%", once: true } });
-  });
+          <FadeIn delay={120}>
+            <div style={{ marginTop: 64 }}>
+              <AccentSlab accent={ACCENT.farm} />
+              <ImageCard
+                src="assets/projects/02_farm/prototype_side.png"
+                alt="Прототип фитофермы · вид сбоку"
+                caption="Прототип · вид сбоку"
+                height={620}
+              />
+            </div>
+          </FadeIn>
 
-  /* ── Accent slabs slide in ── */
-  document.querySelectorAll(".accent-slab").forEach(el => {
-    gsap.fromTo(el,
-      { scaleX: 0, transformOrigin: "left center" },
-      { scaleX: 1, duration: 0.7, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 90%", once: true } });
-  });
+          <FadeIn>
+            <div className="pf-twocol">
+              <SpecTable rows={[
+                ["Пользователь", "65–80 лет"],
+                ["Материал", "Переработанный rPP / rPET"],
+                ["База", "100 × 40 см, 4 поворотных колеса"],
+                ["Нагрузка", "Кашпо 2–4 кг · рама до 40 кг"],
+                ["Сборка", "Разборная без клея"],
+                ["Центр тяжести", "Низкий, с равномерным распределением"],
+              ]} />
+              <ImageCard
+                src="assets/projects/02_farm/scenario.png"
+                alt="Сценарий использования"
+                caption="Сценарий · раскадровка"
+                height={460}
+              />
+            </div>
+          </FadeIn>
 
-  /* ── Analog rows stagger ── */
-  document.querySelectorAll(".analog").forEach((el, i) => {
-    gsap.fromTo(el,
-      { opacity: 0, x: el.classList.contains("flip") ? 30 : -30 },
-      { opacity: 1, x: 0, duration: 0.9, ease: "power3.out",
-        scrollTrigger: { trigger: el, start: "top 85%", once: true } });
-  });
-</script>
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 24 }}>Образ пользователя</div>
+              <PersonaCard
+                accent={ACCENT.farm}
+                name="Людмила"
+                age="68 лет"
+                body="Живёт одна, ухаживает за растениями. Тяжело поднимать горшки, неудобно наклоняться. Потребности: перемещать без подъёма, меньше наклоняться, безопасность и самостоятельность."
+              />
+            </div>
+          </FadeIn>
 
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 24 }}>Аналоги</div>
+              <Gallery items={[
+                { src: "assets/projects/02_farm/example_ikea.png",      alt: "IKEA KRYDDA / VÄXER",  caption: "IKEA KRYDDA / VÄXER · настольная" },
+                { src: "assets/projects/02_farm/example_greenstalk.png", alt: "GreenStalk",           caption: "GreenStalk · ярусная башня" },
+                { src: "assets/projects/02_farm/example_aerogarden.png", alt: "AeroGarden",           caption: "AeroGarden · гидропоника" },
+              ]} />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-tech-wrap" style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 16 }}>Чертёж</div>
+              <ImageCard
+                src="assets/projects/02_farm/chertezh.png"
+                alt="Технический чертёж фитофермы"
+                caption="Чертёж · рама, узлы, колёсная база"
+                height={620}
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    );
+
+    /* ─── Section 03 — Repair ─── */
+    const Section03 = () => (
+      <section id="repair" className="pf-section" data-screen-label="03 Repair" style={{ "--accent": ACCENT.repair }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="03"
+              eyebrow="Domestic Repair"
+              title="Ремонтная<br/>станция"
+              accent={ACCENT.repair}
+              lede="Упаковочная коробка для доставки смартфона на ремонт, трансформирующаяся в рабочую станцию мастера. Оранжевый картон — сигнальный цвет сервиса. Внутри: держатели инструментов, отсеки, подставка для устройства."
+            />
+          </FadeIn>
+
+          <FadeIn delay={120}>
+            <div style={{ marginTop: 64 }}>
+              <AccentSlab accent={ACCENT.repair} />
+              <ImageCard
+                alt="Hero · Открытая ремонтная станция"
+                caption="Открыто · рабочая станция"
+                height={620}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-twocol even">
+              <ImageCard alt="Закрыто · курьерская доставка" height={460} caption="Закрыто — курьерская доставка" />
+              <ImageCard alt="Открыто · рабочая станция"   height={460} caption="Открыто — рабочая станция" />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-tech-wrap" style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.repair, marginBottom: 16 }}>Технические развёртки</div>
+              <TechDrawing accent={ACCENT.repair} views={[
+                { shape: "top",   caption: "Развёртка · flat layout" },
+                { shape: "front", caption: "Держатели инструментов" },
+                { shape: "side",  caption: "Отсеки деталей · ручка" },
+              ]} />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
+              <ImageCard alt="Прототип · крупный план" height={420} />
+              <div style={{ display: "grid", gap: 16 }}>
+                <ImageCard alt="Деталь · паз" height={202} />
+                <ImageCard alt="Деталь · застёжка" height={202} />
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    );
+
+    /* ─── Section 04 — Art recycling: машинка-батарейка ─── */
+    const Section04 = () => (
+      <section id="art" className="pf-section is-art" data-screen-label="04 Art" style={{ "--accent": ACCENT.art }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="04"
+              eyebrow="Art Recycling"
+              title="Машинка—<br/>батарейка"
+              accent={ACCENT.art}
+              lede="Машинка для скрутки сигарет переосмыслена как батарейка — метафора цифрового скроллинга. Два ролика — два полюса. Журнальная лента — бесконечный поток контента. Крутят рукоятку — из одного ролика в другой перематывается лента — энергия внимания, которую вы отдаёте экрану."
+            />
+          </FadeIn>
+
+          <FadeIn delay={120}>
+            <div style={{ marginTop: 64 }}>
+              <ImageCard
+                src="assets/projects/04_art/concept_battery.png"
+                alt="Концепт · машинка-батарейка"
+                caption="Концепт · два ролика = два полюса"
+                height={620}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-twocol even">
+              <ImageCard
+                src="assets/projects/04_art/sketch.png"
+                alt="Эскиз"
+                caption="Эскиз · проработка идеи"
+                height={520}
+              />
+              <ImageCard
+                src="assets/projects/04_art/moodboard.jpg"
+                alt="Мудборд"
+                caption="Мудборд · визуальный язык"
+                height={520}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-twocol even" style={{ marginTop: 64 }}>
+              <ImageCard
+                src="assets/projects/04_art/chertezh_1.png"
+                alt="Чертёж · вид спереди"
+                caption="Чертёж · вид спереди"
+                height={520}
+              />
+              <ImageCard
+                src="assets/projects/04_art/chertezh_2.png"
+                alt="Чертёж · сечение"
+                caption="Чертёж · сечение и ролики"
+                height={520}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.art, marginBottom: 24 }}>Материалы</div>
+              <ImageCard
+                src="assets/projects/04_art/materials.png"
+                alt="Материалы проекта"
+                caption="Материальная палитра"
+                height={520}
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    );
+
+    function App() {
+      return (
+        <React.Fragment>
+          <Nav />
+          <Hero />
+          <Section01 />
+          <Section02 />
+          <Section03 />
+          <Section04 />
+          <Footer />
+        </React.Fragment>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
 </body>
 </html>
