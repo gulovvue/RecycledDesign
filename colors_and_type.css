@@ -1,0 +1,199 @@
+/* ─────────────────────────────────────────────────────────
+   Recycling Portfolio — Данилов М.Ф.
+   Design tokens: colors + type
+   Inspired by Nothing Studio dark portfolio aesthetic.
+   ───────────────────────────────────────────────────────── */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap");
+
+:root {
+  /* ── BASE COLORS ── */
+  --bg:            #1A1A1A;     /* primary page background */
+  --bg-deep:       #0D0D0D;     /* darkest, gallery-mode (Project 04) */
+  --bg-footer:     #111111;     /* footer / sub-cards */
+  --surface:       #222222;     /* cards, drawing wells, technical bg */
+  --surface-2:     #2A2A2A;     /* hover surface */
+  --line:          rgba(255, 255, 255, 0.08);
+  --line-strong:   rgba(255, 255, 255, 0.16);
+
+  --fg:            #F0F0F0;     /* primary text */
+  --fg-2:          #AAAAAA;     /* body text */
+  --fg-3:          #888888;     /* secondary / captions */
+  --fg-4:          #555555;     /* footer mute */
+  --fg-faint:      rgba(255, 255, 255, 0.03); /* huge ghost numerals */
+
+  /* ── PROJECT ACCENTS ── */
+  --accent-domestic: #E8D5B0;   /* 01 — Стойка для растений (cream) */
+  --accent-eco:      #8BFF6E;   /* 02 — Вертикальная ферма (acid green) */
+  --accent-repair:   #FF8C42;   /* 03 — Ремонтная станция (orange) */
+  --accent-art:      #E0DDD6;   /* 04 — Журнальный стенд (paper) */
+
+  /* default accent (overridden per-section) */
+  --accent: var(--accent-domestic);
+
+  /* ── TYPE — FAMILIES ── */
+  --font-display: "Space Grotesk", "Neue Haas Grotesk Display Pro",
+                  "Inter", system-ui, sans-serif;
+  --font-sans:    "Inter", "Neue Haas Grotesk Display Pro",
+                  system-ui, -apple-system, sans-serif;
+  --font-mono:    ui-monospace, "JetBrains Mono", "SF Mono", Menlo, monospace;
+
+  /* ── TYPE — SCALE ── */
+  --fs-hero:       clamp(80px, 13vw, 220px);
+  --fs-display:    clamp(56px, 7vw, 112px);
+  --fs-h1:         clamp(48px, 5vw, 72px);
+  --fs-h2:         clamp(32px, 3.4vw, 56px);
+  --fs-h3:         28px;
+  --fs-h4:         20px;
+  --fs-body:       17px;
+  --fs-small:      14px;
+  --fs-eyebrow:    11px;
+  --fs-numeral:    clamp(180px, 22vw, 320px);
+
+  --lh-tight:      0.95;
+  --lh-snug:       1.1;
+  --lh-body:       1.65;
+
+  --ls-tight:      -0.03em;
+  --ls-eyebrow:    0.15em;
+  --ls-caps:       0.02em;
+
+  /* ── SPACING ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+  --space-9:  96px;
+  --space-10: 144px;
+
+  --gutter-desktop: 96px;
+  --gutter-mobile:  24px;
+  --container-max:  1280px;
+
+  /* ── RADII ── */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  30px;        /* image cards in figma */
+  --radius-pill: 999px;
+
+  /* ── ELEVATION (mostly flat — accents instead of shadows) ── */
+  --shadow-soft: 0 1px 0 rgba(255,255,255,0.04) inset;
+  --shadow-pop:  0 24px 60px -20px rgba(0,0,0,0.6);
+
+  /* ── MOTION ── */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:  180ms;
+  --dur-base:  320ms;
+  --dur-slow:  600ms;
+}
+
+/* ── SEMANTIC ELEMENT STYLES ── */
+html, body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, .h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h1);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+h2, .h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-snug);
+  letter-spacing: var(--ls-tight);
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+h3, .h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-h3);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+
+h4, .h4 {
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: var(--fs-h4);
+  line-height: 1.3;
+  color: var(--fg);
+}
+
+.hero-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--fs-hero);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--fs-eyebrow);
+  font-weight: 600;
+  letter-spacing: var(--ls-eyebrow);
+  text-transform: uppercase;
+  color: var(--accent, var(--fg-3));
+}
+
+.caption {
+  font-family: var(--font-sans);
+  font-size: var(--fs-small);
+  color: var(--fg-3);
+  letter-spacing: var(--ls-caps);
+}
+
+p, .body {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--fg-2);
+  text-wrap: pretty;
+}
+
+.numeral-bg {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--fs-numeral);
+  line-height: 0.9;
+  color: var(--fg-faint);
+  letter-spacing: -0.06em;
+  user-select: none;
+  pointer-events: none;
+}
+
+a {
+  color: var(--fg);
+  text-decoration: none;
+  transition: opacity var(--dur-fast) var(--ease-out);
+}
+a:hover { opacity: 0.7; }
+
+hr, .divider {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: var(--space-8) 0;
+}

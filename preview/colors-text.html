@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Text colors</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg);}
+  .row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .item{background:var(--surface);border-radius:8px;padding:18px;}
+  .label{font-family:var(--font-mono);font-size:11px;color:var(--fg-3);}
+  .sample{font-family:var(--font-display);font-weight:700;font-size:34px;line-height:1;letter-spacing:-0.03em;margin-top:6px;}
+  .hex{font-family:var(--font-mono);font-size:11px;margin-top:8px;color:var(--fg-3);}
+</style></head><body>
+<div class="row">
+  <div class="item"><div class="label">--fg</div><div class="sample" style="color:#F0F0F0">Aa</div><div class="hex">#F0F0F0 · primary</div></div>
+  <div class="item"><div class="label">--fg-2</div><div class="sample" style="color:#AAAAAA">Aa</div><div class="hex">#AAAAAA · body</div></div>
+  <div class="item"><div class="label">--fg-3</div><div class="sample" style="color:#888888">Aa</div><div class="hex">#888888 · caption</div></div>
+  <div class="item"><div class="label">--fg-4</div><div class="sample" style="color:#555555">Aa</div><div class="hex">#555555 · footer mute</div></div>
+</div>
+</body></html>

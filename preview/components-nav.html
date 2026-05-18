@@ -1,0 +1,22 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Components · Nav</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:0;background:var(--bg);font-family:var(--font-sans);}
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 24px;background:rgba(26,26,26,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);}
+  .logo{font-family:var(--font-display);font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.02em;}
+  .links{display:flex;gap:28px;}
+  .link{font-size:13px;color:var(--fg-2);font-weight:500;}
+  .link .num{color:var(--fg-3);margin-right:6px;}
+  .pad{padding:24px;color:var(--fg-3);font-family:var(--font-mono);font-size:11px;text-transform:uppercase;letter-spacing:.1em;}
+</style></head><body>
+<div class="nav">
+  <div class="logo">ДМФ</div>
+  <div class="links">
+    <span class="link"><span class="num">01</span>Domestic</span>
+    <span class="link"><span class="num">02</span>Eco Farm</span>
+    <span class="link"><span class="num">03</span>Repair</span>
+    <span class="link"><span class="num">04</span>Art</span>
+  </div>
+</div>
+<div class="pad">Sticky · backdrop-blur(12px) · scroll &gt; 80px</div>
+</body></html>

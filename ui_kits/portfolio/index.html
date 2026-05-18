@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Recycling — 4 подхода · Данилов М.Ф. · 1-МГ-50</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel" src="Nav.jsx"></script>
+  <script type="text/babel" src="Hero.jsx"></script>
+  <script type="text/babel" src="Components.jsx"></script>
+  <script type="text/babel">
+    const ACCENT = {
+      domestic: "#E8D5B0",
+      farm:     "#8BFF6E",
+      repair:   "#FF8C42",
+      art:      "#E0DDD6",
+    };
+
+    const FadeIn = ({ children, delay = 0 }) => {
+      const ref = React.useRef(null);
+      React.useEffect(() => {
+        const el = ref.current;
+        const io = new IntersectionObserver(([e]) => {
+          if (e.isIntersecting) { el.classList.add("is-in"); io.disconnect(); }
+        }, { threshold: 0.08 });
+        io.observe(el);
+        return () => io.disconnect();
+      }, []);
+      return <div ref={ref} className="pf-fade" style={{ transitionDelay: `${delay}ms` }}>{children}</div>;
+    };
+
+    /* ─── Section 01 — Подход (Domestic recycling concept) ─── */
+    const Section01 = () => (
+      <section id="approach" className="pf-section" data-screen-label="01 Подход" style={{ "--accent": ACCENT.domestic }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="01"
+              eyebrow="Domestic Recycling"
+              title="Подход —<br/>бытовая переработка"
+              accent={ACCENT.domestic}
+              lede="Подход в промышленном дизайне, при котором повседневные объекты не утилизируются, а повторно используются с изменением формы и функции. В отличие от классической переработки, материал не проходит цикл разрушения — он сохраняется как физическая структура. Идея — переосмысление существующего объекта и создание на его основе нового функционального решения."
+            />
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.domestic, marginBottom: 24 }}>Ключевые принципы</div>
+              <PrincipleList accent={ACCENT.domestic} items={[
+                "Сохранение формы — частичное или полное сохранение исходной геометрии. Базовая конструкция не меняется радикально, а используется как основа.",
+                "Изменение функции — предмет, изначально предназначенный для одной задачи, начинает выполнять другую. Упаковка → хранение, рабочая поверхность, инструментальный модуль.",
+                "Минимальное вмешательство — никаких клеев и дополнительных материалов. Только пазы, сгибы и существующие соединения исходного объекта.",
+                "Доступная реализация — снижает затраты, упрощает производство, открывает процесс для самостоятельной сборки в бытовых условиях.",
+              ]} />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.domestic, marginBottom: 24 }}>Аналоги — как работают другие</div>
+            </div>
+          </FadeIn>
+
+          <FadeIn delay={80}>
+            <AnalogRow
+              accent={ACCENT.domestic}
+              source="NIKELAB"
+              title="Air Max — упаковка как рюкзак"
+              body="Упаковка обуви разработана так, что после извлечения продукта может использоваться как рюкзак. Конструкция из жёсткого переработанного пластика с отверстиями для крепления ремней. Упаковка изначально проектируется как функциональный объект, а не одноразовый элемент."
+              src="../../assets/projects/_approach/example_nike.png"
+              alt="Nike Air Max — упаковка-рюкзак"
+            />
+          </FadeIn>
+
+          <FadeIn delay={80}>
+            <AnalogRow
+              accent={ACCENT.domestic}
+              source="PUMA"
+              title="Clever Little Bag"
+              body="Гибридная система: картонная основа + многоразовая сумка. Упаковка выполняет несколько функций — хранение, транспортировка, дальнейшее использование. Сокращает отходы и повышает функциональность."
+              src="../../assets/projects/_approach/example_puma.png"
+              alt="PUMA Clever Little Bag"
+              flip
+            />
+          </FadeIn>
+
+          <FadeIn delay={80}>
+            <AnalogRow
+              accent={ACCENT.domestic}
+              source="YUTO DESIGN"
+              title="Упаковка → полка"
+              body="Упаковка после раскрытия и изменения конфигурации превращается в компактную полку для хранения документов. Особенность: трансформация без дополнительных элементов, за счёт заранее предусмотренной геометрии и механики складывания."
+              src="../../assets/projects/_approach/example_yuto.png"
+              alt="YUTO Design — упаковка-полка"
+            />
+          </FadeIn>
+        </div>
+      </section>
+    );
+
+    /* ─── Section 02 — Eco / Модульная вертикальная фитоферма ─── */
+    const Section02 = () => (
+      <section id="farm" className="pf-section" data-screen-label="02 Eco Farm" style={{ "--accent": ACCENT.farm }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="02"
+              eyebrow="Eco Approach"
+              title="Модульная<br/>вертикальная фитоферма"
+              accent={ACCENT.farm}
+              lede="Мобильная напольная фитоферма для пользователей 65–80 лет. Горшки крепятся в индивидуальные чехлы на горизонтальных пазах панели без инструментов. Перемещение без подъёма, уход без наклонов."
+            />
+          </FadeIn>
+
+          <FadeIn delay={120}>
+            <div style={{ marginTop: 64 }}>
+              <AccentSlab accent={ACCENT.farm} />
+              <ImageCard
+                src="../../assets/projects/02_farm/prototype_side.png"
+                alt="Прототип фитофермы · вид сбоку"
+                caption="Прототип · вид сбоку"
+                height={620}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-twocol">
+              <SpecTable rows={[
+                ["Пользователь", "65–80 лет"],
+                ["Материал", "Переработанный rPP / rPET"],
+                ["База", "100 × 40 см, 4 поворотных колеса"],
+                ["Нагрузка", "Кашпо 2–4 кг · рама до 40 кг"],
+                ["Сборка", "Разборная без клея"],
+                ["Центр тяжести", "Низкий, с равномерным распределением"],
+              ]} />
+              <ImageCard
+                src="../../assets/projects/02_farm/scenario.png"
+                alt="Сценарий использования"
+                caption="Сценарий · раскадровка"
+                height={460}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 24 }}>Образ пользователя</div>
+              <PersonaCard
+                accent={ACCENT.farm}
+                name="Людмила"
+                age="68 лет"
+                body="Живёт одна, ухаживает за растениями. Тяжело поднимать горшки, неудобно наклоняться. Потребности: перемещать без подъёма, меньше наклоняться, безопасность и самостоятельность."
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 24 }}>Аналоги</div>
+              <Gallery items={[
+                { src: "../../assets/projects/02_farm/example_ikea.png",      alt: "IKEA KRYDDA / VÄXER",  caption: "IKEA KRYDDA / VÄXER · настольная" },
+                { src: "../../assets/projects/02_farm/example_greenstalk.png", alt: "GreenStalk",           caption: "GreenStalk · ярусная башня" },
+                { src: "../../assets/projects/02_farm/example_aerogarden.png", alt: "AeroGarden",           caption: "AeroGarden · гидропоника" },
+              ]} />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-tech-wrap" style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 16 }}>Чертёж</div>
+              <ImageCard
+                src="../../assets/projects/02_farm/chertezh.png"
+                alt="Технический чертёж фитофермы"
+                caption="Чертёж · рама, узлы, колёсная база"
+                height={620}
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    );
+
+    /* ─── Section 03 — Repair ─── */
+    const Section03 = () => (
+      <section id="repair" className="pf-section" data-screen-label="03 Repair" style={{ "--accent": ACCENT.repair }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="03"
+              eyebrow="Domestic Repair"
+              title="Ремонтная<br/>станция"
+              accent={ACCENT.repair}
+              lede="Упаковочная коробка для доставки смартфона на ремонт, трансформирующаяся в рабочую станцию мастера. Оранжевый картон — сигнальный цвет сервиса. Внутри: держатели инструментов, отсеки, подставка для устройства."
+            />
+          </FadeIn>
+
+          <FadeIn delay={120}>
+            <div style={{ marginTop: 64 }}>
+              <AccentSlab accent={ACCENT.repair} />
+              <ImageCard
+                alt="Hero · Открытая ремонтная станция"
+                caption="Открыто · рабочая станция"
+                height={620}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-twocol even">
+              <ImageCard alt="Закрыто · курьерская доставка" height={460} caption="Закрыто — курьерская доставка" />
+              <ImageCard alt="Открыто · рабочая станция"   height={460} caption="Открыто — рабочая станция" />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-tech-wrap" style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.repair, marginBottom: 16 }}>Технические развёртки</div>
+              <TechDrawing accent={ACCENT.repair} views={[
+                { shape: "top",   caption: "Развёртка · flat layout" },
+                { shape: "front", caption: "Держатели инструментов" },
+                { shape: "side",  caption: "Отсеки деталей · ручка" },
+              ]} />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
+              <ImageCard alt="Прототип · крупный план" height={420} />
+              <div style={{ display: "grid", gap: 16 }}>
+                <ImageCard alt="Деталь · паз" height={202} />
+                <ImageCard alt="Деталь · застёжка" height={202} />
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    );
+
+    /* ─── Section 04 — Art recycling: машинка-батарейка ─── */
+    const Section04 = () => (
+      <section id="art" className="pf-section is-art" data-screen-label="04 Art" style={{ "--accent": ACCENT.art }}>
+        <div className="pf-section-inner">
+          <FadeIn>
+            <ProjectHeader
+              num="04"
+              eyebrow="Art Recycling"
+              title="Машинка—<br/>батарейка"
+              accent={ACCENT.art}
+              lede="Машинка для скрутки сигарет переосмыслена как батарейка — метафора цифрового скроллинга. Два ролика — два полюса. Журнальная лента — бесконечный поток контента. Крутят рукоятку — из одного ролика в другой перематывается лента — энергия внимания, которую вы отдаёте экрану."
+            />
+          </FadeIn>
+
+          <FadeIn delay={120}>
+            <div style={{ marginTop: 64 }}>
+              <ImageCard
+                src="../../assets/projects/04_art/concept_battery.png"
+                alt="Концепт · машинка-батарейка"
+                caption="Концепт · два ролика = два полюса"
+                height={620}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-twocol even">
+              <ImageCard
+                src="../../assets/projects/04_art/sketch.png"
+                alt="Эскиз"
+                caption="Эскиз · проработка идеи"
+                height={520}
+              />
+              <ImageCard
+                src="../../assets/projects/04_art/moodboard.jpg"
+                alt="Мудборд"
+                caption="Мудборд · визуальный язык"
+                height={520}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div className="pf-twocol even" style={{ marginTop: 64 }}>
+              <ImageCard
+                src="../../assets/projects/04_art/chertezh_1.png"
+                alt="Чертёж · вид спереди"
+                caption="Чертёж · вид спереди"
+                height={520}
+              />
+              <ImageCard
+                src="../../assets/projects/04_art/chertezh_2.png"
+                alt="Чертёж · сечение"
+                caption="Чертёж · сечение и ролики"
+                height={520}
+              />
+            </div>
+          </FadeIn>
+
+          <FadeIn>
+            <div style={{ marginTop: 96 }}>
+              <div className="pf-eyebrow" style={{ "--accent": ACCENT.art, marginBottom: 24 }}>Материалы</div>
+              <ImageCard
+                src="../../assets/projects/04_art/materials.png"
+                alt="Материалы проекта"
+                caption="Материальная палитра"
+                height={520}
+              />
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+    );
+
+    function App() {
+      return (
+        <React.Fragment>
+          <Nav />
+          <Hero />
+          <Section01 />
+          <Section02 />
+          <Section03 />
+          <Section04 />
+          <Footer />
+        </React.Fragment>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>

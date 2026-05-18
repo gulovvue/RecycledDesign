@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Spacing scale</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body{margin:0;padding:24px;background:var(--bg);}
+  .row{display:flex;align-items:center;gap:14px;padding:8px 0;border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:11px;color:var(--fg-3);}
+  .row:last-child{border:0;}
+  .tag{width:90px;flex-shrink:0;text-transform:uppercase;letter-spacing:.1em;}
+  .bar{height:14px;background:#E8D5B0;border-radius:2px;}
+  .px{color:var(--fg-2);width:60px;}
+</style></head><body>
+<div class="row"><div class="tag">--space-2</div><div class="bar" style="width:8px"></div><div class="px">8</div></div>
+<div class="row"><div class="tag">--space-4</div><div class="bar" style="width:16px"></div><div class="px">16</div></div>
+<div class="row"><div class="tag">--space-5</div><div class="bar" style="width:24px"></div><div class="px">24</div></div>
+<div class="row"><div class="tag">--space-7</div><div class="bar" style="width:48px"></div><div class="px">48</div></div>
+<div class="row"><div class="tag">--space-9</div><div class="bar" style="width:96px"></div><div class="px">96 · gutter</div></div>
+<div class="row"><div class="tag">--space-10</div><div class="bar" style="width:144px"></div><div class="px">144 · section</div></div>
+</body></html>

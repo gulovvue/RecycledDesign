@@ -1,0 +1,136 @@
+/* UI Kit · Portfolio landing — local styles built on tokens */
+@import url("../../colors_and_type.css");
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+.pf-wrap { max-width: 1280px; margin: 0 auto; padding: 0 var(--gutter-desktop); }
+@media (max-width: 760px) { .pf-wrap { padding: 0 var(--gutter-mobile); } }
+
+/* ── NAV ─────────────────────────────── */
+.pf-nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  transition: background var(--dur-base) var(--ease-out),
+              backdrop-filter var(--dur-base) var(--ease-out);
+}
+.pf-nav.is-scrolled {
+  background: rgba(26,26,26,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+}
+.pf-nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 22px var(--gutter-desktop);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.pf-logo { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: -0.02em; color: var(--fg); }
+.pf-nav-links { display: flex; gap: 36px; }
+.pf-nav-link { font-size: 13px; color: var(--fg-2); font-weight: 500; }
+.pf-nav-num { color: var(--fg-3); margin-right: 8px; font-family: var(--font-mono); font-size: 11px; }
+
+/* ── HERO ─────────────────────────────── */
+.pf-hero {
+  position: relative; min-height: 100vh;
+  display: grid; grid-template-rows: 1fr auto auto;
+  padding: 140px var(--gutter-desktop) 64px;
+  max-width: 1280px; margin: 0 auto;
+}
+.pf-hero-eyebrow {
+  position: absolute; top: 96px; left: var(--gutter-desktop);
+  font-family: var(--font-display); font-size: 14px; color: var(--fg-3); letter-spacing: 0.04em;
+}
+.pf-hero-title {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(80px, 13vw, 200px);
+  line-height: 0.92; letter-spacing: -0.04em; text-transform: uppercase;
+  color: var(--fg);
+  align-self: center; margin: 0;
+}
+.pf-hero-meta {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
+  margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--line);
+  font-size: 14px; color: var(--fg-3); letter-spacing: 0.04em; text-transform: uppercase;
+}
+.pf-hero-quote { color: var(--fg-2); text-transform: none; letter-spacing: 0; font-style: italic; }
+.pf-hero-scroll { margin-top: 40px; font-size: 13px; color: var(--fg-2); letter-spacing: 0.05em; text-transform: uppercase; }
+
+/* ── SECTIONS ─────────────────────────── */
+.pf-section { position: relative; padding: 144px var(--gutter-desktop); overflow: hidden; }
+.pf-section.is-art { background: var(--bg-deep); }
+.pf-section-inner { max-width: 1280px; margin: 0 auto; position: relative; }
+
+.pf-section-head { position: relative; padding-bottom: 64px; }
+.pf-ghost {
+  position: absolute; left: -20px; top: -90px;
+  font-family: var(--font-display); font-weight: 800; font-size: 320px; line-height: 0.85;
+  color: rgba(255,255,255,0.03); letter-spacing: -0.06em; pointer-events: none; user-select: none;
+}
+.pf-section-top { display: flex; justify-content: space-between; align-items: flex-start; position: relative; }
+.pf-section-num { font-family: var(--font-display); font-weight: 700; font-size: 36px; letter-spacing: -0.02em; color: var(--fg); }
+.pf-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); }
+.pf-section-title {
+  position: relative; margin: 64px 0 0;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(48px, 6vw, 96px); line-height: 0.95; letter-spacing: -0.03em; color: var(--fg);
+}
+.pf-section-lede { position: relative; max-width: 640px; margin: 32px 0 0; font-size: 18px; line-height: 1.65; color: var(--fg-2); }
+
+/* ── IMAGE CARDS ──────────────────────── */
+.pf-image-card { position: relative; margin: 0; border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); }
+.pf-image-card.is-bleed { border-radius: 0; margin: 0 calc(-1 * var(--gutter-desktop)); }
+.pf-image-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s var(--ease-out); }
+.pf-image-card:hover img { transform: scale(1.02); }
+.pf-image-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;
+  background: repeating-linear-gradient(45deg, #222 0 12px, #1f1f1f 12px 24px);
+  color: var(--fg-3); font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.18em;
+}
+.pf-image-cap { position: absolute; left: 24px; bottom: 20px; font-size: 13px; color: rgba(255,255,255,0.85); letter-spacing: 0.04em; }
+.pf-slab { height: 3px; margin-bottom: 24px; }
+
+/* ── 2-COLUMN BLOCK ───────────────────── */
+.pf-twocol { display: grid; grid-template-columns: 4fr 6fr; gap: 64px; align-items: start; margin-top: 96px; }
+.pf-twocol.even { grid-template-columns: 1fr 1fr; }
+@media (max-width: 760px) { .pf-twocol, .pf-twocol.even { grid-template-columns: 1fr; gap: 32px; } }
+
+.pf-spec { font-family: var(--font-sans); }
+.pf-spec-title { font-family: var(--font-display); font-size: 28px; font-weight: 600; letter-spacing: -0.01em; color: var(--fg); margin-bottom: 24px; }
+.pf-spec-grid { display: grid; grid-template-columns: 160px 1fr; row-gap: 18px; column-gap: 16px; margin: 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 15px; }
+.pf-spec-grid dt { color: var(--fg-3); text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; margin: 0; padding-top: 2px; }
+.pf-spec-grid dd { color: var(--fg); margin: 0; }
+
+/* ── GALLERY ─────────────────────────── */
+.pf-gallery { display: grid; gap: 16px; margin-top: 64px; }
+
+/* ── TECH DRAWINGS ───────────────────── */
+.pf-tech { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 64px; }
+.pf-tech-cell { background: var(--surface); border-radius: 20px; padding: 32px; }
+.pf-tech-art { position: relative; height: 280px; }
+.pf-tech-art svg { width: 100%; height: 100%; }
+.pf-tech-tick { position: absolute; left: 0; bottom: 0; width: 60px; height: 2px; }
+.pf-tech-cap { font-family: var(--font-mono); font-size: 11px; color: var(--fg-3); margin-top: 18px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+/* ── SCENARIOS (linear sketches) ─── */
+.pf-scenarios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 64px; }
+.pf-scen { background: transparent; border: 1px solid var(--line); border-radius: 20px; padding: 28px; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between; }
+.pf-scen-num { font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.14em; }
+.pf-scen-label { font-family: var(--font-display); font-size: 22px; font-weight: 500; color: var(--fg); }
+.pf-scen-glyph { height: 56px; border-bottom: 1px solid var(--line); }
+
+/* ── MATERIAL BOARD ──────────────── */
+.pf-material { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 64px; }
+.pf-material-cell { aspect-ratio: 4 / 3; border-radius: 20px; padding: 24px; display: flex; align-items: flex-end; }
+.pf-material-cell .name { font-family: var(--font-display); font-size: 20px; color: var(--fg); }
+
+/* ── FOOTER ──────────────────────── */
+.pf-footer { background: var(--bg-footer); padding: 96px var(--gutter-desktop) 32px; border-top: 1px solid var(--line); margin-top: 144px; }
+.pf-footer-row { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; font-family: var(--font-display); font-size: 18px; color: var(--fg); padding-bottom: 96px; }
+.pf-footer-row > div:nth-child(2) { text-align: center; color: var(--fg-3); }
+.pf-footer-row > div:nth-child(3) { text-align: right; color: var(--fg-3); }
+.pf-footer-mark { font-family: var(--font-display); font-weight: 800; font-size: clamp(120px, 18vw, 280px); line-height: 0.85; letter-spacing: -0.04em; color: #212121; text-align: center; }
+.pf-footer-bottom { max-width: 1280px; margin: 32px auto 0; display: flex; justify-content: space-between; font-size: 12px; color: var(--fg-4); letter-spacing: 0.08em; }
+.pf-footer-bottom span { margin-right: 18px; }
+
+/* ── ENTRY ANIMATION ─────────────── */
+.pf-fade { opacity: 0; transform: translateY(30px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+.pf-fade.is-in { opacity: 1; transform: none; }
