@@ -4,16 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Recycling — 4 подхода · Данилов М.Ф. · 1-МГ-50</title>
-  <link rel="stylesheet" href="ui_kits/portfolio/styles.css">
+  <link rel="stylesheet" href="styles.css">
   <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaaqe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="root"></div>
-  <script type="text/babel" src="ui_kits/portfolio/Nav.jsx"></script>
-  <script type="text/babel" src="ui_kits/portfolio/Hero.jsx"></script>
-  <script type="text/babel" src="ui_kits/portfolio/Components.jsx"></script>
+  <script type="text/babel" src="Nav.jsx"></script>
+  <script type="text/babel" src="Hero.jsx"></script>
+  <script type="text/babel" src="Components.jsx"></script>
   <script type="text/babel">
     const ACCENT = {
       domestic: "#E8D5B0",
@@ -42,7 +42,7 @@
           <FadeIn>
             <ProjectHeader
               num="01"
-              eyebrow="Domestic Recycling"
+              eyebrow="Methodology"
               title="Подход —<br/>бытовая переработка"
               accent={ACCENT.domestic}
               lede="Подход в промышленном дизайне, при котором повседневные объекты не утилизируются, а повторно используются с изменением формы и функции. В отличие от классической переработки, материал не проходит цикл разрушения — он сохраняется как физическая структура. Идея — переосмысление существующего объекта и создание на его основе нового функционального решения."
@@ -73,7 +73,7 @@
               source="NIKELAB"
               title="Air Max — упаковка как рюкзак"
               body="Упаковка обуви разработана так, что после извлечения продукта может использоваться как рюкзак. Конструкция из жёсткого переработанного пластика с отверстиями для крепления ремней. Упаковка изначально проектируется как функциональный объект, а не одноразовый элемент."
-              src="assets/projects/_approach/example_nike.png"
+              src="./assets/projects/approach/example_nike.webp"
               alt="Nike Air Max — упаковка-рюкзак"
             />
           </FadeIn>
@@ -84,7 +84,7 @@
               source="PUMA"
               title="Clever Little Bag"
               body="Гибридная система: картонная основа + многоразовая сумка. Упаковка выполняет несколько функций — хранение, транспортировка, дальнейшее использование. Сокращает отходы и повышает функциональность."
-              src="assets/projects/_approach/example_puma.png"
+              src="./assets/projects/approach/example_puma.webp"
               alt="PUMA Clever Little Bag"
               flip
             />
@@ -96,7 +96,7 @@
               source="YUTO DESIGN"
               title="Упаковка → полка"
               body="Упаковка после раскрытия и изменения конфигурации превращается в компактную полку для хранения документов. Особенность: трансформация без дополнительных элементов, за счёт заранее предусмотренной геометрии и механики складывания."
-              src="assets/projects/_approach/example_yuto.png"
+              src="./assets/projects/approach/example_yuto.webp"
               alt="YUTO Design — упаковка-полка"
             />
           </FadeIn>
@@ -104,222 +104,303 @@
       </section>
     );
 
-    /* ─── Section 02 — Eco / Модульная вертикальная фитоферма ─── */
-    const Section02 = () => (
-      <section id="farm" className="pf-section" data-screen-label="02 Eco Farm" style={{ "--accent": ACCENT.farm }}>
+    /* ──────────────────────────────────────────────────────────
+       OBJECT-SECTION SKELETON — единая структура для 02 / 03 / 04
+       ────────────────────────────────────────────────────────── */
+    const SectionBlockEyebrow = ({ label, accent }) => (
+      <div className="pf-eyebrow pf-block-eyebrow" style={{ "--accent": accent }}>{label}</div>
+    );
+
+    const ObjectSection = ({ id, num, eyebrow, title, lede, accent, screenLabel, isDark, hero, context, analogs, concept, sketches, drawings, environment, spec }) => (
+      <section id={id} className={`pf-section ${isDark ? "is-art" : ""}`} data-screen-label={screenLabel} style={{ "--accent": accent }}>
         <div className="pf-section-inner">
           <FadeIn>
-            <ProjectHeader
-              num="02"
-              eyebrow="Eco Approach"
-              title="Модульная<br/>вертикальная фитоферма"
-              accent={ACCENT.farm}
-              lede="Мобильная напольная фитоферма для пользователей 65–80 лет. Горшки крепятся в индивидуальные чехлы на горизонтальных пазах панели без инструментов. Перемещение без подъёма, уход без наклонов."
-            />
+            <ProjectHeader num={num} eyebrow={eyebrow} title={title} lede={lede} accent={accent} />
           </FadeIn>
 
-          <FadeIn delay={120}>
-            <div style={{ marginTop: 64 }}>
-              <AccentSlab accent={ACCENT.farm} />
-              <ImageCard
-                src="assets/projects/02_farm/prototype_side.png"
-                alt="Прототип фитофермы · вид сбоку"
-                caption="Прототип · вид сбоку"
-                height={620}
-              />
-            </div>
-          </FadeIn>
+          {/* 1 · Hero */}
+          {hero && (
+            <FadeIn delay={120}>
+              <div style={{ marginTop: 64 }}>
+                <AccentSlab accent={accent} />
+                <ImageCard src={hero.src} fullSrc={hero.fullSrc} alt={hero.alt} caption={hero.caption} height={620} />
+              </div>
+            </FadeIn>
+          )}
 
-          <FadeIn>
-            <div className="pf-twocol">
-              <SpecTable rows={[
-                ["Пользователь", "65–80 лет"],
-                ["Материал", "Переработанный rPP / rPET"],
-                ["База", "100 × 40 см, 4 поворотных колеса"],
-                ["Нагрузка", "Кашпо 2–4 кг · рама до 40 кг"],
-                ["Сборка", "Разборная без клея"],
-                ["Центр тяжести", "Низкий, с равномерным распределением"],
-              ]} />
-              <ImageCard
-                src="assets/projects/02_farm/scenario.png"
-                alt="Сценарий использования"
-                caption="Сценарий · раскадровка"
-                height={460}
-              />
-            </div>
-          </FadeIn>
+          {/* 2 · Spec + сценарий (опционально, для проектов с табл. характеристик) */}
+          {spec && (
+            <FadeIn>
+              <div className="pf-twocol" style={{ marginTop: 96 }}>
+                <SpecTable rows={spec.rows} title={spec.title || "Характеристики"} />
+                {spec.image && (
+                  <ImageCard src={spec.image.src} fullSrc={spec.image.fullSrc} alt={spec.image.alt} caption={spec.image.caption} height={460} />
+                )}
+              </div>
+            </FadeIn>
+          )}
 
-          <FadeIn>
-            <div style={{ marginTop: 96 }}>
-              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 24 }}>Образ пользователя</div>
-              <PersonaCard
-                accent={ACCENT.farm}
-                name="Людмила"
-                age="68 лет"
-                body="Живёт одна, ухаживает за растениями. Тяжело поднимать горшки, неудобно наклоняться. Потребности: перемещать без подъёма, меньше наклоняться, безопасность и самостоятельность."
-              />
-            </div>
-          </FadeIn>
+          {/* 3 · Контекст пользователя / Исторический контекст */}
+          {context && (
+            <FadeIn>
+              <div style={{ marginTop: 96 }}>
+                <SectionBlockEyebrow label={context.eyebrow} accent={accent} />
+                {context.type === "persona" && (
+                  <PersonaCard accent={accent} name={context.name} age={context.age} body={context.body} />
+                )}
+                {context.type === "historical" && (
+                  <div className="pf-historical">
+                    <div className="pf-historical-text">
+                      <p>{context.body}</p>
+                    </div>
+                    {context.image && (
+                      <ImageCard src={context.image.src} fullSrc={context.image.fullSrc} alt={context.image.alt} caption={context.image.caption} height={460} />
+                    )}
+                  </div>
+                )}
+              </div>
+            </FadeIn>
+          )}
 
-          <FadeIn>
-            <div style={{ marginTop: 96 }}>
-              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 24 }}>Аналоги</div>
-              <Gallery items={[
-                { src: "assets/projects/02_farm/example_ikea.png",      alt: "IKEA KRYDDA / VÄXER",  caption: "IKEA KRYDDA / VÄXER · настольная" },
-                { src: "assets/projects/02_farm/example_greenstalk.png", alt: "GreenStalk",           caption: "GreenStalk · ярусная башня" },
-                { src: "assets/projects/02_farm/example_aerogarden.png", alt: "AeroGarden",           caption: "AeroGarden · гидропоника" },
-              ]} />
-            </div>
-          </FadeIn>
+          {/* 4 · Аналоги */}
+          {analogs && analogs.length > 0 && (
+            <FadeIn>
+              <div style={{ marginTop: 96 }}>
+                <SectionBlockEyebrow label="Аналоги" accent={accent} />
+                <Gallery items={analogs} columns={analogs.length >= 4 ? 4 : 3} />
+              </div>
+            </FadeIn>
+          )}
 
-          <FadeIn>
-            <div className="pf-tech-wrap" style={{ marginTop: 96 }}>
-              <div className="pf-eyebrow" style={{ "--accent": ACCENT.farm, marginBottom: 16 }}>Чертёж</div>
-              <ImageCard
-                src="assets/projects/02_farm/chertezh.png"
-                alt="Технический чертёж фитофермы"
-                caption="Чертёж · рама, узлы, колёсная база"
-                height={620}
-              />
-            </div>
-          </FadeIn>
+          {/* 5 · Концепция / принципы */}
+          {concept && (
+            <FadeIn>
+              <div style={{ marginTop: 96 }}>
+                <SectionBlockEyebrow label={concept.eyebrow || "Концепция"} accent={accent} />
+                {concept.type === "principles" && <PrincipleList accent={accent} items={concept.items} />}
+                {concept.type === "prose" && <p className="pf-section-lede" style={{ maxWidth: 880, marginTop: 0 }}>{concept.body}</p>}
+                {concept.images && concept.images.length > 0 && (
+                  <div style={{ marginTop: 48 }}>
+                    <Gallery items={concept.images} columns={concept.images.length >= 2 ? 2 : 1} />
+                  </div>
+                )}
+              </div>
+            </FadeIn>
+          )}
+
+          {/* 6 · Эскизы */}
+          {sketches && sketches.length > 0 && (
+            <FadeIn>
+              <div style={{ marginTop: 96 }}>
+                <SectionBlockEyebrow label="Эскизы" accent={accent} />
+                <Gallery items={sketches} columns={sketches.length >= 2 ? 2 : 1} />
+              </div>
+            </FadeIn>
+          )}
+
+          {/* 7 · Чертежи */}
+          {drawings && drawings.length > 0 && (
+            <FadeIn>
+              <div style={{ marginTop: 96 }}>
+                <SectionBlockEyebrow label="Чертежи" accent={accent} />
+                <Gallery items={drawings} columns={drawings.length >= 2 ? 2 : 1} />
+              </div>
+            </FadeIn>
+          )}
+
+          {/* 8 · Прототип в среде */}
+          {environment && environment.length > 0 && (
+            <FadeIn>
+              <div style={{ marginTop: 96 }}>
+                <SectionBlockEyebrow label="Прототип в среде" accent={accent} />
+                <Gallery items={environment} columns={environment.length >= 3 ? Math.min(environment.length, 4) : 2} />
+              </div>
+            </FadeIn>
+          )}
         </div>
       </section>
     );
 
-    /* ─── Section 03 — Repair ─── */
+    /* ─── Section 02 — Eco / Модульная вертикальная фитоферма ─── */
+    const Section02 = () => (
+      <ObjectSection
+        id="farm"
+        screenLabel="02 Eco Farm"
+        accent={ACCENT.farm}
+        num="02"
+        eyebrow="Eco Approach"
+        title="Модульная<br/>вертикальная фитоферма"
+        lede="Мобильная напольная фитоферма для пользователей 65–80 лет. Горшки крепятся в индивидуальные чехлы на горизонтальных пазах панели без инструментов. Перемещение без подъёма, уход без наклонов."
+        hero={{
+          src: "./assets/projects/02_farm/prototype_main.webp", fullSrc: "./assets/projects/02_farm/prototype_main-full.png",
+          alt: "Прототип фитофермы",
+          caption: "Прототип · общий вид"
+        }}
+        spec={{
+          rows: [
+            ["Пользователь", "65–80 лет"],
+            ["Материал", "Переработанный rPP / rPET"],
+            ["База", "100 × 40 см, 4 поворотных колеса"],
+            ["Нагрузка", "Кашпо 2–4 кг · рама до 40 кг"],
+            ["Сборка", "Разборная без клея"],
+            ["Центр тяжести", "Низкий, с равномерным распределением"],
+          ],
+          image: {
+            src: "./assets/projects/02_farm/scenario.webp",
+            alt: "Сценарий использования",
+            caption: "Сценарий · раскадровка",
+          },
+        }}
+        context={{
+          type: "persona",
+          eyebrow: "Образ пользователя",
+          name: "Людмила",
+          age: "68 лет",
+          body: "Живёт одна, ухаживает за растениями. Тяжело поднимать горшки, неудобно наклоняться. Потребности: перемещать без подъёма, меньше наклоняться, безопасность и самостоятельность."
+        }}
+        analogs={[
+          { src: "./assets/projects/02_farm/example_ikea.webp",       alt: "IKEA KRYDDA / VÄXER", caption: "IKEA KRYDDA / VÄXER · настольная" },
+          { src: "./assets/projects/02_farm/example_greenstalk.webp", alt: "GreenStalk",          caption: "GreenStalk · ярусная башня" },
+          { src: "./assets/projects/02_farm/example_aerogarden.webp", alt: "AeroGarden",          caption: "AeroGarden · гидропоника" },
+        ]}
+        concept={{
+          eyebrow: "Эко-подход",
+          type: "principles",
+          items: [
+            "Переработанный пластик rPP / rPET вместо первичного.",
+            "Минимизация количества материалов и компонентов.",
+            "Разборная конструкция без клея — все соединения механические.",
+            "Возможность замены отдельных элементов без замены всего изделия.",
+            "Сортировка деталей по мономатериалам для повторной переработки.",
+          ],
+        }}
+        sketches={[
+          { src: "./assets/projects/02_farm/sketch.webp", alt: "Эскизы фитофермы", caption: "Эскизы · проработка узлов" },
+        ]}
+        drawings={[
+          { src: "./assets/projects/02_farm/chertezh.webp", alt: "Чертёж фитофермы", caption: "Чертёж · рама, узлы, колёсная база" },
+        ]}
+        environment={[
+          { src: "./assets/projects/02_farm/render_wide.webp", fullSrc: "./assets/projects/02_farm/render_wide-full.png",  alt: "Рендер · общий вид в интерьере",   caption: "Рендер · в интерьере" },
+          { src: "./assets/projects/02_farm/render_close.webp", fullSrc: "./assets/projects/02_farm/render_close-full.png", alt: "Рендер · фрагмент и кашпо",        caption: "Рендер · узел крепления" },
+          { src: "./assets/projects/02_farm/prototype_main.webp", fullSrc: "./assets/projects/02_farm/prototype_main-full.png", alt: "Прототип · общий вид", caption: "Прототип · общий вид" },
+          { src: "./assets/projects/02_farm/prototype_side.webp", fullSrc: "./assets/projects/02_farm/prototype_side-full.png", alt: "Прототип · вид сбоку", caption: "Прототип · вид сбоку" },
+        ]}
+      />
+    );
+
+    /* ─── Section 03 — Repair / Ремонтная станция ─── */
     const Section03 = () => (
-      <section id="repair" className="pf-section" data-screen-label="03 Repair" style={{ "--accent": ACCENT.repair }}>
-        <div className="pf-section-inner">
-          <FadeIn>
-            <ProjectHeader
-              num="03"
-              eyebrow="Domestic Repair"
-              title="Ремонтная<br/>станция"
-              accent={ACCENT.repair}
-              lede="Упаковочная коробка для доставки смартфона на ремонт, трансформирующаяся в рабочую станцию мастера. Оранжевый картон — сигнальный цвет сервиса. Внутри: держатели инструментов, отсеки, подставка для устройства."
-            />
-          </FadeIn>
-
-          <FadeIn delay={120}>
-            <div style={{ marginTop: 64 }}>
-              <AccentSlab accent={ACCENT.repair} />
-              <ImageCard
-                alt="Hero · Открытая ремонтная станция"
-                caption="Открыто · рабочая станция"
-                height={620}
-              />
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div className="pf-twocol even">
-              <ImageCard alt="Закрыто · курьерская доставка" height={460} caption="Закрыто — курьерская доставка" />
-              <ImageCard alt="Открыто · рабочая станция"   height={460} caption="Открыто — рабочая станция" />
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div className="pf-tech-wrap" style={{ marginTop: 96 }}>
-              <div className="pf-eyebrow" style={{ "--accent": ACCENT.repair, marginBottom: 16 }}>Технические развёртки</div>
-              <TechDrawing accent={ACCENT.repair} views={[
-                { shape: "top",   caption: "Развёртка · flat layout" },
-                { shape: "front", caption: "Держатели инструментов" },
-                { shape: "side",  caption: "Отсеки деталей · ручка" },
-              ]} />
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div style={{ marginTop: 96, display: "grid", gridTemplateColumns: "2fr 1fr", gap: 16 }}>
-              <ImageCard alt="Прототип · крупный план" height={420} />
-              <div style={{ display: "grid", gap: 16 }}>
-                <ImageCard alt="Деталь · паз" height={202} />
-                <ImageCard alt="Деталь · застёжка" height={202} />
-              </div>
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <ObjectSection
+        id="repair"
+        screenLabel="03 Repair"
+        accent={ACCENT.repair}
+        num="03"
+        eyebrow="Domestic Recycling"
+        title="Трансформируемая<br/>ремонтная станция"
+        lede="Жёсткая упаковка «Золотого Яблока» трансформируется в компактную ремонтную станцию для мелкой электроники. Без дополнительных материалов: только элементы самой коробки — основание, крышка, боковые клапаны, вставные полосы."
+        hero={{
+          src: "./assets/projects/03_repair/hero.webp", fullSrc: "./assets/projects/03_repair/hero-full.png",
+          alt: "Ремонтная станция · развёрнутая конфигурация в среде",
+          caption: "Прототип · развёрнутая станция"
+        }}
+        context={{
+          type: "persona",
+          eyebrow: "Образ пользователя",
+          name: "Дмитрий",
+          age: "21 год, студент",
+          body: "Использует смартфон, наушники и другую мелкую электронику каждый день. Иногда сам разбирает устройства — заменить деталь, почистить разъём, проверить аккумулятор. Проблема: отсутствие удобной рабочей поверхности — детали и винты теряются на столе, инструменты лежат хаотично."
+        }}
+        analogs={[
+          { src: "./assets/projects/03_repair/analog_ifixit.webp",    alt: "iFixit Pro Tech Toolkit",     caption: "iFixit · кейс + съёмный лоток" },
+          { src: "./assets/projects/03_repair/analog_solderbot.webp", alt: "Solderbot Soldering Station", caption: "Solderbot · чемодан-станция" },
+          { src: "./assets/projects/03_repair/analog_tactix.webp",    alt: "Tactix Technician Case",      caption: "Tactix · модульные контейнеры" },
+        ]}
+        concept={{
+          eyebrow: "Принципы трансформации",
+          type: "principles",
+          items: [
+            "Основание коробки — центральная рабочая поверхность для разборки устройства.",
+            "Крышка поднимается и становится вертикальной задней панелью для тонких инструментов.",
+            "Боковые клапаны формируют ограничители и боковые секции.",
+            "Вставные полосы из той же коробки — перегородки для винтов и мелких компонентов.",
+            "Фиксация через пазы, загибы и вставки — без клея, пластика и металла.",
+            "Конструкция снова складывается — раскладываемая станция, а не одноразовая поделка.",
+          ],
+        }}
+        sketches={[
+          { src: "./assets/projects/03_repair/sketch.webp", alt: "Эскиз", caption: "Эскиз · идея трансформации" },
+        ]}
+        drawings={[
+          { src: "./assets/projects/03_repair/chertezh.webp", alt: "Чертёж · развёртка коробки", caption: "Чертёж · развёртка и размеры" },
+        ]}
+        environment={[
+          { src: "./assets/projects/03_repair/env1.webp", fullSrc: "./assets/projects/03_repair/env1-full.png", alt: "В среде · общий вид", caption: "В среде · общий вид" },
+          { src: "./assets/projects/03_repair/env2.webp", fullSrc: "./assets/projects/03_repair/env2-full.png", alt: "В среде · ракурс",    caption: "В среде · ракурс" },
+        ]}
+      />
     );
 
     /* ─── Section 04 — Art recycling: машинка-батарейка ─── */
     const Section04 = () => (
-      <section id="art" className="pf-section is-art" data-screen-label="04 Art" style={{ "--accent": ACCENT.art }}>
-        <div className="pf-section-inner">
-          <FadeIn>
-            <ProjectHeader
-              num="04"
-              eyebrow="Art Recycling"
-              title="Машинка—<br/>батарейка"
-              accent={ACCENT.art}
-              lede="Машинка для скрутки сигарет переосмыслена как батарейка — метафора цифрового скроллинга. Два ролика — два полюса. Журнальная лента — бесконечный поток контента. Крутят рукоятку — из одного ролика в другой перематывается лента — энергия внимания, которую вы отдаёте экрану."
-            />
-          </FadeIn>
-
-          <FadeIn delay={120}>
-            <div style={{ marginTop: 64 }}>
-              <ImageCard
-                src="assets/projects/04_art/concept_battery.png"
-                alt="Концепт · машинка-батарейка"
-                caption="Концепт · два ролика = два полюса"
-                height={620}
-              />
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div className="pf-twocol even">
-              <ImageCard
-                src="assets/projects/04_art/sketch.png"
-                alt="Эскиз"
-                caption="Эскиз · проработка идеи"
-                height={520}
-              />
-              <ImageCard
-                src="assets/projects/04_art/moodboard.jpg"
-                alt="Мудборд"
-                caption="Мудборд · визуальный язык"
-                height={520}
-              />
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div className="pf-twocol even" style={{ marginTop: 64 }}>
-              <ImageCard
-                src="assets/projects/04_art/chertezh_1.png"
-                alt="Чертёж · вид спереди"
-                caption="Чертёж · вид спереди"
-                height={520}
-              />
-              <ImageCard
-                src="assets/projects/04_art/chertezh_2.png"
-                alt="Чертёж · сечение"
-                caption="Чертёж · сечение и ролики"
-                height={520}
-              />
-            </div>
-          </FadeIn>
-
-          <FadeIn>
-            <div style={{ marginTop: 96 }}>
-              <div className="pf-eyebrow" style={{ "--accent": ACCENT.art, marginBottom: 24 }}>Материалы</div>
-              <ImageCard
-                src="assets/projects/04_art/materials.png"
-                alt="Материалы проекта"
-                caption="Материальная палитра"
-                height={520}
-              />
-            </div>
-          </FadeIn>
-        </div>
-      </section>
+      <ObjectSection
+        id="art"
+        screenLabel="04 Art"
+        accent={ACCENT.art}
+        num="04"
+        eyebrow="Art Recycling"
+        title="Лента —<br/>разряд"
+        lede="Машинка для скрутки сигарет переосмыслена как батарейка — метафора цифрового скроллинга. Два ролика — два полюса. Журнальная лента — бесконечный поток контента. Крутят рукоятку — энергия внимания, которую вы отдаёте экрану."
+        hero={{
+          src: "./assets/projects/04_art/env_1.webp", fullSrc: "./assets/projects/04_art/env_1-full.png",
+          alt: "Машинка-батарейка · кадр в среде",
+          caption: "Объект · кадр в среде"
+        }}
+        context={{
+          type: "historical",
+          eyebrow: "Исторический контекст",
+          body: "Art recycling — создание художественных и дизайнерских объектов из существующих, списанных или отходных материалов с приданием им новой функции и смысла. Начало XX века: коллажи Пикассо и Брака — газеты, упаковки, обои входят во «высокое» искусство. Dada и ready-made Дюшана — поворот к найденным объектам как полноценному арт-материалу. Вторая половина XX века: художники сознательно работают с мусором (Arman — «Accumulations»/«Poubelles») — как критика потребления.",
+          image: {
+            src: "./assets/projects/04_art/historical_picasso.webp",
+            alt: "Пикассо и Брак · коллажи",
+            caption: "Пикассо и Брак · коллажи",
+          },
+        }}
+        analogs={[
+          { src: "./assets/projects/04_art/analog_tetsuzo.webp", alt: "Tetsuzo Okubo × Damien Hirst",  caption: "Tetsuzo Okubo × Damien Hirst · архив → wearable art" },
+          { src: "./assets/projects/04_art/analog_mcm.webp",     alt: "MCM × Selassie",                caption: "MCM × Selassie · архив бренда → коллекция" },
+          { src: "./assets/projects/04_art/analog_sarah.webp",   alt: "Sarah Coleman",                 caption: "Sarah Coleman · сумка → интерьер" },
+          { src: "./assets/projects/04_art/analog_maxlamb.webp", alt: "Max Lamb × Potato Head",        caption: "Max Lamb × Potato Head · отходы → мебель" },
+        ]}
+        concept={{
+          eyebrow: "Концепция",
+          type: "prose",
+          body: "Каждый скролл требует энергии — нашей. Объект построен на метафоре батарейки: два цилиндрических роллера — два полюса. Между ними непрерывный поток контента, который мы прокручиваем снова и снова. Механическое действие обнажает суть: листая ленту, мы не заряжаемся — мы разряжаемся. Внимание, время, эмоции уходят в бесконечный поток обложек, лиц, заголовков. Зритель крутит роллер руками — и физически ощущает, сколько усилий стоит одна минута в ленте.",
+          images: [
+            { src: "./assets/projects/04_art/concept_battery.webp", alt: "Референс · машинка для самокруток", caption: "Референс · машинка для самокруток", height: 460 },
+            { src: "./assets/projects/04_art/moodboard.webp",       alt: "Мудборд",                          caption: "Мудборд · визуальный язык",     height: 460 },
+          ],
+        }}
+        sketches={[
+          { src: "./assets/projects/04_art/sketch.webp", alt: "Эскиз", caption: "Эскиз · проработка идеи" },
+        ]}
+        drawings={[
+          { src: "./assets/projects/04_art/chertezh_1.webp", alt: "Чертёж · вид спереди", caption: "Чертёж · вид спереди" },
+        ]}
+        environment={[
+          { src: "./assets/projects/04_art/render_1.webp", fullSrc: "./assets/projects/04_art/render_1-full.png", alt: "Рендер · 1",    caption: "Рендер · 1" },
+          { src: "./assets/projects/04_art/render_2.webp", fullSrc: "./assets/projects/04_art/render_2-full.png", alt: "Рендер · 2",    caption: "Рендер · 2" },
+          { src: "./assets/projects/04_art/env_1.webp", fullSrc: "./assets/projects/04_art/env_1-full.png",    alt: "В среде · 1",   caption: "В среде · 1" },
+          { src: "./assets/projects/04_art/env_2.webp", fullSrc: "./assets/projects/04_art/env_2-full.png",    alt: "В среде · 2",   caption: "В среде · 2" },
+          { src: "./assets/projects/04_art/env_3.webp", fullSrc: "./assets/projects/04_art/env_3-full.png",    alt: "В среде · 3",   caption: "В среде · 3" },
+          { src: "./assets/projects/04_art/env_4.webp", fullSrc: "./assets/projects/04_art/env_4-full.png",    alt: "В среде · 4",   caption: "В среде · 4" },
+        ]}
+      />
     );
 
     function App() {
       return (
-        <React.Fragment>
+        <LightboxProvider>
           <Nav />
           <Hero />
           <Section01 />
@@ -327,7 +408,7 @@
           <Section03 />
           <Section04 />
           <Footer />
-        </React.Fragment>
+        </LightboxProvider>
       );
     }
 
